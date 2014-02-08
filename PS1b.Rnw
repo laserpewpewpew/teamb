@@ -1,0 +1,155 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\pagestyle{empty}
+
+\begin{center}
+{\Large \textbf{POLI 5003: Problem Set \# 1, Team B}}
+\end{center}
+
+The \emph{Partido Revolucionario Institucional} (PRI) maintained authoritarian rule over Mexico for more than seventy years, from the end of the Mexican Revolution until after the July 2000 elections.  The dataset accompanying this assignment (\texttt{mex2000.dta}) is drawn from a survey conducted during that electoral campaign.  You will use it to examine the predictors of Mexicans' attitudes towards the PRI and its opponents at that critical time in the country's history. 
+
+<<label=Setup>>=
+# Setup
+require(foreign)
+mex <- read.dta("mex2000.dta")
+var.labels <- attr(mex,"var.labels")
+data.key <- data.frame(var.name=names(mex),var.labels)
+data.key
+@
+
+\begin{enumerate}
+\item Examine the variable \texttt{prefPRI}, which records how much more survey respondents' liked the PRI than their next-most-liked party (negative values indicate that they like another party \emph{better} than the PRI).  What is the range of this variable?  What is its mode, median, and mean?\\
+
+% In a Sweave document R code is placed in chunks delineated by  <<>>= and @.  Options go between the angled brackets.  Type all of the code needed to get your answer in the chunk below, then add your textual answer after the @.  Note that you can add R output to your text using the command \Sexpr{}
+
+
+<<label=Answer1>>=
+summary(mex$prefPRI)
+table(mex$prefPRI)
+@
+\begin{itemize}
+  \item Shown in the descriptive statistics above the range of \texttt{prefPRI} is (-10,10).  The mode is the most frequently occuring value of the variable or, in this case, 0.  The median is 0.  The mean is -0.8837.  
+\end{itemize}
+
+
+\item During its long rule, the PRI worked to present itself as the party of all Mexicans and was therefore something of an ideological chameleon.  Nevertheless, we might hypothesize that people who leaned more to the right would have stronger preferences for this authoritarian party over its opponents (Americanists may recall V.O. Key's writings about the one-party South).  Is this hypothesis supported by a simple regression of \texttt{prefPRI}?  How do you know?  Describe the estimated effect of ideology on preferences for the PRI over its opponents.  \\
+
+<<label=Answer2>>=
+fit.1 <- lm(prefPRI ~ rightide, data=mex)
+summary(fit.1)
+@
+
+\begin{itemize}
+  \item Yes, the hypothesis that people who leaned more to the right would have stronger preferences for this authoritarian party over its opponents is supported by a simple regression of \texttt{prefPRI} on \texttt{rightide}, a variable measure ideological position on a uni-dimensional 0-10 scale.  A positive, statistically significant coefficient of .320 tells us that for every one unit increase in ideology in the conservative direction (positive increase), we can expect a .320 unit increase in the distance between how a respondent feels about PRI and how they feel about the best-liked opposition party.  That is, this regression model is telling us that the more conservative a respondent is, the more they support the PRI relative to its opponents.
+\end{itemize}
+
+
+\item Suppose we hypothesize that respondents' preferences for the PRI over its opponents were also a function of their assessments of how well the PRI had governed lately as well as their personal characteristics.  Is our ideology hypothesis still supported when these factors are taken into account?  \\
+
+<<label=Answer3>>=
+fit.2 <- lm(prefPRI ~ rightide + econpers + econnat+corrupt+crime+
+              female+ses+churchatt, data=mex)
+summary(fit.2)
+@
+
+\begin{itemize}
+  \item The answer to this question depends on how we operationalize "assessments of how well the PRI had governed lately" and "personal characteristics".  We decided to include the variables \texttt{econpers}, \texttt{econnat}, \texttt{corrupt}, and \texttt{crime} as control variables for assessment of PRI governance.  We expect to see a positive relationship with the first two and the dependent variable (as higher values of these variables correspond to greater feelings about overall economic situations), and a negative relationship with that last two and the dependent variable (as higher values in these variables indicate more of something negative, being corruption/crime).  In addition, we included variables \texttt{female}, \texttt{ses}, and \texttt{churchatt} as personal characteristic control variables.  The results are listed below in table 1, next to the base model established in the previous question.
+  \end{itemize}
+
+\item Based on this model, which variable had the strongest estimated effect on respondents' preferences for the PRI over its opponents?  \\
+
+
+\begin{itemize}
+  \item Ideology
+ 
+  \item Personal Econ.  
+  
+  \item National Econ.
+  
+  \item Corruption
+  
+  \item Crime
+  
+  \item Female
+  
+  \item SES
+  
+  \item Church Attendance
+  
+\end{itemize}
+
+<<label=Answer4>>=
+summary(mex)
+
+# Ideology
+id1 <- -2.19022 + .26599*0 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+id2 <- -2.19022 + .26599*10 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+ideoSub <- abs(id1-id2)
+
+# Personal Econ
+pe1 <- -2.19022 + .26599*6.447 + .14302*1 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+pe2 <- -2.19022 + .26599*6.447 + .14302*5 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+persSub <- abs(pe1-pe2)
+
+# National Econ
+ne1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*1 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+ne2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*5 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+natSub <- abs(ne1-ne2)
+
+# Corruption
+corr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*1 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+corr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*5 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+corrSub <- abs(corr1-corr2)
+
+# Crime
+cr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*1 + .72701*0 - .33258*2.582 - .15010*3.177
+cr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*5 + .72701*0 - .33258*2.582 - .15010*3.177
+crimSub <- abs(cr1-cr2)
+
+# Female
+fem1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
+fem2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*1 - .33258*2.582 - .15010*3.177
+femSub <- abs(fem1-fem2)
+
+# SES
+ses1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*1 - .15010*3.177
+ses2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*6 - .15010*3.177
+sesSub <- abs(ses1-ses2)
+
+# Church Attendance
+chu1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*1
+chu2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
+  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*5
+churchSub <- abs(chu1-chu2)
+
+ideoSub
+persSub
+natSub
+corrSub
+crimSub
+femSub
+sesSub
+churchSub
+@
+
+\end{enumerate}
+\end{document}
