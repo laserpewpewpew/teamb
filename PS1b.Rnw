@@ -56,6 +56,7 @@ fit.2 <- lm(prefPRI ~ rightide + econpers + econnat+corrupt+crime+
 summary(fit.2)
 @
 
+
 \begin{itemize}
   \item The answer to this question depends on how we operationalize "assessments of how well the PRI had governed lately" and "personal characteristics".  We decided to include the variables \texttt{econpers}, \texttt{econnat}, \texttt{corrupt}, and \texttt{crime} as control variables for assessment of PRI governance.  We expect to see a positive relationship with the first two and the dependent variable (as higher values of these variables correspond to greater feelings about overall economic situations), and a negative relationship with that last two and the dependent variable (as higher values in these variables indicate more of something negative, being corruption/crime).  In addition, we included variables \texttt{female}, \texttt{ses}, and \texttt{churchatt} as personal characteristic control variables.  The results are listed below in table 1, next to the base model established in the previous question.
   \end{itemize}
@@ -150,6 +151,36 @@ femSub
 sesSub
 churchSub
 @
+
+
+\begin{itemize}
+ \item Since the variables are measured on different scales, in order to compare the estimate effect on responsents' preference for the PRI, we need to calcualte the absolute effect on the dependent variable of each variable. 
+ For instance, for the variable of ideology, we input the maximum value and minimum value of the ideology data while holding all other variables constant by attributing the mean of each variables, and we subtract the two numbers.The absolute value of the difference of the two numbers is the estimate effect of ideology on the preference for PRI.
+ \texttt{prefPRI(1)}=-2.19022 + .26599*\texttt{ideology(max)} + .14302*\texttt{personaleco(mean)} + .72776*\texttt{nationaleco(mean)} - .35553*\texttt{corrupt(mean)} -  .24213*\testtt{crime(mean)} + .72701*\texttt{female(mean)} - .33258*\texttt{ses(mean)} - .15010*\texttt{churchattend(mean)}
+ 
+ \texttt{prefPRI(2)}=-2.19022 + .26599*\texttt{ideology(min)} + .14302*\texttt{personaleco(mean)} + .72776*\texttt{nationaleco(mean)} - .35553*\texttt{corrupt(mean)} -  .24213*\testtt{crime(mean)} + .72701*\texttt{female(mean)} - .33258*\texttt{ses(mean)} - .15010*\texttt{churchattend(mean)}
+ 
+ estimate effect=\left|\texttt{prefPRI(1)-prefPRI(2)\right|
+ 
+ We repete this calculation for other variables and get the results bellow in table 2. As we can see, people's perception on national economic situation has the strongest substanive effect on their preference for PRI over other parties(\textttt{2.91104}), followed by personal ideology(\texttt{2.6599}), social-economic status(\texttt{1.6629}) and perception on goverenment corruption(\texttt{1.42212}). Personal economic situation has the least substantive effect on the preference to PRI.
+
+\begin{center}
+    \begin{tabular}{ | l | l |}
+    \hline
+    Variable & Effect of Substance \\ \hline
+    ideoSub & 2.6599 \\ \hline
+    perSub & 0.57208 \\ \hline
+    natSub & 2.91104 \\ \hline
+    corrSub & 1.42212 \\ \hline
+    crimeSub & 0.96852 \\ \hline
+    femSub & 0.72701 \\ \hline
+    sesSub & 1.6629 \\ \hline
+    churchSub & 0.6004 \\ 
+    \hline
+    \end{tabular}
+\end{center}
+
+
 
 \end{enumerate}
 \end{document}
