@@ -63,106 +63,16 @@ summary(fit.2)
 
 \item Based on this model, which variable had the strongest estimated effect on respondents' preferences for the PRI over its opponents?  \\
 
-
-\begin{itemize}
-  \item Ideology
- 
-  \item Personal Econ.  
-  
-  \item National Econ.
-  
-  \item Corruption
-  
-  \item Crime
-  
-  \item Female
-  
-  \item SES
-  
-  \item Church Attendance
-  
-\end{itemize}
-
 <<label=Answer4>>=
-summary(mex)
 
-# Ideology
-id1 <- -2.19022 + .26599*0 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-id2 <- -2.19022 + .26599*10 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-ideoSub <- abs(id1-id2)
-
-# Personal Econ
-pe1 <- -2.19022 + .26599*6.447 + .14302*1 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-pe2 <- -2.19022 + .26599*6.447 + .14302*5 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-persSub <- abs(pe1-pe2)
-
-# National Econ
-ne1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*1 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-ne2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*5 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-natSub <- abs(ne1-ne2)
-
-# Corruption
-corr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*1 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-corr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*5 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-corrSub <- abs(corr1-corr2)
-
-# Crime
-cr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*1 + .72701*0 - .33258*2.582 - .15010*3.177
-cr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*5 + .72701*0 - .33258*2.582 - .15010*3.177
-crimSub <- abs(cr1-cr2)
-
-# Female
-fem1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-fem2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*1 - .33258*2.582 - .15010*3.177
-femSub <- abs(fem1-fem2)
-
-# SES
-ses1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*1 - .15010*3.177
-ses2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*6 - .15010*3.177
-sesSub <- abs(ses1-ses2)
-
-# Church Attendance
-chu1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*1
-chu2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-  .24213*3.014 + .72701*0 - .33258*2.582 - .15010*5
-churchSub <- abs(chu1-chu2)
-
-ideoSub
-persSub
-natSub
-corrSub
-crimSub
-femSub
-sesSub
-churchSub
+mex.range <- apply(mex[,6:13], 2, function(x) max(x) - min(x)) 
+max.effects <- mex.range * fit.2$coef[2:9]
+max.effects
 @
 
 
 \begin{itemize}
- \item Since the variables are measured on different scales, in order to compare the estimate effect on responsents' preference for the PRI, we need to calcualte the absolute effect on the dependent variable of each variable. 
- For instance, for the variable of ideology, we input the maximum value and minimum value of the ideology data while holding all other variables constant by attributing the mean of each variables, and we subtract the two numbers.The absolute value of the difference of the two numbers is the estimate effect of ideology on the preference for PRI.
- \texttt{prefPRI(1)}=-2.19022 + .26599*\texttt{ideology(max)} + .14302*\texttt{personaleco(mean)} + .72776*\texttt{nationaleco(mean)} - .35553*\texttt{corrupt(mean)} -  .24213*\testtt{crime(mean)} + .72701*\texttt{female(mean)} - .33258*\texttt{ses(mean)} - .15010*\texttt{churchattend(mean)}
- 
- \texttt{prefPRI(2)}=-2.19022 + .26599*\texttt{ideology(min)} + .14302*\texttt{personaleco(mean)} + .72776*\texttt{nationaleco(mean)} - .35553*\texttt{corrupt(mean)} -  .24213*\testtt{crime(mean)} + .72701*\texttt{female(mean)} - .33258*\texttt{ses(mean)} - .15010*\texttt{churchattend(mean)}
- 
- estimate effect=\left|\texttt{prefPRI(1)-prefPRI(2)\right|
- 
- We repete this calculation for other variables and get the results bellow in table 2. As we can see, people's perception on national economic situation has the strongest substanive effect on their preference for PRI over other parties(\textttt{2.91104}), followed by personal ideology(\texttt{2.6599}), social-economic status(\texttt{1.6629}) and perception on goverenment corruption(\texttt{1.42212}). Personal economic situation has the least substantive effect on the preference to PRI.
+ \item To determine the strongest estimated effect we looked at the effect of moving from the min to the max for each variable using the apply() function in R. As we can see, people's perception of the national economic situation has the strongest substanive effect on their preference for PRI over other parties(\textttt{2.91104}), followed by personal ideology(\texttt{2.6599}), social-economic status(\texttt{1.6629}) and perception of goverenment corruption(\texttt{1.42212}). Personal economic situation has the smallest substantive effect on preference for PRI.
 
 \begin{center}
     \begin{tabular}{ | l | l |}
