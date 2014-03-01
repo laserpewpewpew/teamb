@@ -1,0 +1,61 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+
+\usepackage{Sweave}
+\begin{document}
+\input{PS2-concordance}
+
+\pagestyle{empty}
+
+\begin{center}
+{\Large \textbf{POLS 500c: Problem Set \# 3}}
+\end{center}
+
+The dataset \texttt{Obama.dta} is a subset of the 2008 American National Election Survey.  We will use it to examine attitudes toward Barack Obama, using the feeling thermometer \texttt{obama}.
+
+\begin{Schunk}
+\begin{Sinput}
+> # Setup
+> require(foreign)
+> obama <- read.dta("Obama.dta")
+> var.labels <- attr(obama,"var.labels")
+> data.key <- data.frame(var.name=names(obama),var.labels)
+> data.key
+\end{Sinput}
+\begin{Soutput}
+  var.name                      var.labels
+1    obama       Obama feeling thermometer
+2      age                    Years of age
+3   income         Household income, $000s
+4     educ              Years of education
+5   female                          Female
+6    black      R self-identifies as black
+7      dem   R self-identifies as Democrat
+8      rep R self-identifies as Republican
+\end{Soutput}
+\end{Schunk}
+
+\begin{enumerate}
+\item Suppose we hypothesize that a respondent's income affects her or his attitudes toward Obama, that those with higher incomes will express cooler feelings toward him.  Controlling for age, education, gender, race, and partisanship, is this hypothesis supported?  How do you know?
+
+\begin{Schunk}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+\begin{itemize}
+  \item In order to test the hypothesis, we create a linear regression to see whether there is any correlation between the income of a respondent and his or her attitude toward Obama ot not by seting Obama feeling theromometer(variable:obama) as the dependent variable and all other fators as independent variables. 
+As we can see from the table 1, when controlling all other variables, the income of a respondent has a significant effect on his or her atttitude towards Obama. With an increament of one thousands dollar in personal income, the preference of Obama decreases by 0.033.Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
+\end{itemize}
+
+m1<-lm(obama ~ age + income + educ + female + black + dem + rep,data=obama)
+summary(m1)
+
+packages<-c("ggplot2","RCurl","stargazer")
+library("ggplot2")
+library("RCurl")
+library("stargazer")
+
+
+m1
+

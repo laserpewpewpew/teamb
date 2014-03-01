@@ -1,0 +1,101 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\pagestyle{empty}
+
+\begin{center}
+{\Large \textbf{POLS 500c: Problem Set \# 3}}
+\end{center}
+
+The dataset \texttt{Obama.dta} is a subset of the 2008 American National Election Survey.  We will use it to examine attitudes toward Barack Obama, using the feeling thermometer \texttt{obama}.
+
+<<label=Setup>>=
+# Setup
+library(foreign)
+obama<-read.dta("C:\\Users\\Dong\\Desktop\\intermediate method-Spring 2014\\ProblemSet\\ProblemSet2\\Obama.dta")
+
+require(foreign)
+obama <- read.dta("Obama.dta")
+
+var.labels <- attr(obama,"var.labels")
+data.key <- data.frame(var.name=names(obama),var.labels)
+data.key
+@
+
+\begin{enumerate}
+\item Suppose we hypothesize that a respondent's income affects her or his attitudes toward Obama, that those with higher incomes will express cooler feelings toward him.  Controlling for age, education, gender, race, and partisanship, is this hypothesis supported?  How do you know?
+
+<<label=Answer1>>=
+m1<-lm(obama ~ age + income + educ + female + black + dem + rep,data=obama)
+summary(m1)
+
+@
+\begin{itemize}
+  \item In order to test the hypothesis, we create a linear regression to see whether there is any correlation between the income of a respondent and his or her attitude toward Obama ot not by seting Obama feeling theromometer(variable:obama) as the dependent variable and all other fators as independent variables. 
+As we can see "income=-0.03332" from the table 1, when controlling all other variables, the income of a respondent has a significant effect on his or her atttitude towards Obama. With an increament of one thousands dollar in personal income, the preference of Obama decreases by 0.033.Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
+\end{itemize}
+
+
+@
+
+\item Suppose we think Democrats' feelings toward Obama will be less influenced by their incomes than others' feelings are.  Is there support for this conditional hypothesis?  How do you know?\\
+
+<<label=Answer2>>=
+m2<-lm(obama ~ age + income + dem:income + educ + female + black + dem + rep,data=obama)
+summary(m2)
+
+@
+\begin{itemize}
+  \item In order to test the conditional hypothesis and see how the Democrat identity influences the effect of income on attitude toward Obama, we add an interaction term of "dem:income" as an additional independent variable into the linear model.  
+  
+As we can see "income=-0.053484" from the table 1, when considering the intereaction between income and the Democratic identity, there exists a significant effect that fora non-Democrats (dem=0), when personal income increases by a thousand dollar, the preference of Obama decreases by 0.053. support the hypothesis or not????????????????????
+
+
+\end{itemize}
+
+
+
+
+\item Does income have a statistically significant effect on the feelings toward Obama of those who aren't Democrats?  On the feelings of Democrats?  Report the estimated effect and $p$-value for each.\\
+
+<<label=Answer3>>=
+nondem<-ifelse(obama$dem==0,1,0)
+
+m3<-lm(obama ~ age + income + nondem:income + educ + female + black + nondem + rep,data=obama)
+summary(m3)
+
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)) 
+        install.packages(new.pkg, dependencies = TRUE)
+    sapply(pkg, require, character.only = TRUE)
+}
+
+packages <- c("ggplot2", "RCurl", "arm")
+ipak(packages)
+
+m1
+m2
+m3
+
+@
+<<label=Table1, results=tex,echo=FALSE>>=
+stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude towards Barack Obama", align=TRUE, omit.stat=c("adj.rsq","f","ser"),label="T:res")
+
+
+@
+From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling, with a p-value 1.13e-05. But the siginificance of coefficient of income is not shown in m3 (with a p-value 0.42847), meaning that the income does not have signficant influence on feeling of Democrats.  
+
+
+
+\item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
+
+<<label=Answer4>>=
+
+@
+
+\end{enumerate}
+\end{document}
