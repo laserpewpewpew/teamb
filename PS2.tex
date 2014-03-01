@@ -16,6 +16,8 @@ The dataset \texttt{Obama.dta} is a subset of the 2008 American National Electio
 \begin{Schunk}
 \begin{Sinput}
 > # Setup
+> library(foreign)
+> obama<-read.dta("Obama.dta")
 > require(foreign)
 > obama <- read.dta("Obama.dta")
 > var.labels <- attr(obama,"var.labels")
@@ -40,22 +42,263 @@ The dataset \texttt{Obama.dta} is a subset of the 2008 American National Electio
 
 \begin{Schunk}
 \begin{Sinput}
+> m1<-lm(obama ~ income + age + educ + female + black + dem + rep,data=obama)
+> summary(m1)
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + age + educ + female + black + dem + 
+    rep, data = obama)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-75.815 -11.761   3.395  12.594  66.320 
+
+Coefficients:
+             Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  60.20277    3.24800  18.535  < 2e-16 ***
+income       -0.03332    0.01043  -3.193  0.00143 ** 
+age          -0.03495    0.03013  -1.160  0.24629    
+educ          0.04891    0.21070   0.232  0.81647    
+female        4.48527    0.99574   4.504 7.07e-06 ***
+black        16.76626    1.22609  13.675  < 2e-16 ***
+dem          13.76778    1.14550  12.019  < 2e-16 ***
+rep         -16.71796    1.40899 -11.865  < 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 21.03 on 1850 degrees of freedom
+  (465 observations deleted due to missingness)
+Multiple R-squared:  0.3779,	Adjusted R-squared:  0.3756 
+F-statistic: 160.6 on 7 and 1850 DF,  p-value: < 2.2e-16
+\end{Soutput}
+\begin{Sinput}
 > 
 \end{Sinput}
 \end{Schunk}
 \begin{itemize}
   \item In order to test the hypothesis, we create a linear regression to see whether there is any correlation between the income of a respondent and his or her attitude toward Obama ot not by seting Obama feeling theromometer(variable:obama) as the dependent variable and all other fators as independent variables. 
-As we can see from the table 1, when controlling all other variables, the income of a respondent has a significant effect on his or her atttitude towards Obama. With an increament of one thousands dollar in personal income, the preference of Obama decreases by 0.033.Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
+As we can see "income=-0.03332" from the table 1, when controlling all other variables, the income of a respondent has a significant effect on his or her atttitude towards Obama. With an increament of one thousands dollar in personal income, the preference of Obama decreases by 0.033.Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
 \end{itemize}
 
-m1<-lm(obama ~ age + income + educ + female + black + dem + rep,data=obama)
-summary(m1)
-
-packages<-c("ggplot2","RCurl","stargazer")
-library("ggplot2")
-library("RCurl")
-library("stargazer")
 
 
-m1
+\item Suppose we think Democrats' feelings toward Obama will be less influenced by their incomes than others' feelings are.  Is there support for this conditional hypothesis?  How do you know?\\
 
+\begin{Schunk}
+\begin{Sinput}
+> m2<-lm(obama ~ income + dem + dem:income + age + educ + female + black, data=obama)
+> summary(m2)
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + dem + dem:income + age + educ + 
+    female + black, data = obama)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-77.075 -10.065   1.828  12.986  66.655 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept) 62.16393    3.38054  18.389  < 2e-16 ***
+income      -0.08521    0.01221  -6.979 4.12e-12 ***
+dem         13.51130    1.55414   8.694  < 2e-16 ***
+age         -0.06819    0.03090  -2.207   0.0275 *  
+educ        -0.17733    0.21727  -0.816   0.4145    
+female       4.13791    1.02618   4.032 5.75e-05 ***
+black       18.35369    1.26215  14.542  < 2e-16 ***
+income:dem   0.10446    0.02151   4.858 1.29e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 21.67 on 1850 degrees of freedom
+  (465 observations deleted due to missingness)
+Multiple R-squared:  0.339,	Adjusted R-squared:  0.3365 
+F-statistic: 135.5 on 7 and 1850 DF,  p-value: < 2.2e-16
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+\begin{itemize}
+  \item In order to test the conditional hypothesis and see how the Democrat identity influences the effect of income on attitude toward Obama, we add an interaction term of "dem:income" as an additional independent variable into the linear model.  
+  
+As we can see "income=-0.053484" from the table 1, when considering the intereaction between income and the Democratic identity, there exists a significant effect that fora non-Democrats (dem=0), when personal income increases by a thousand dollar, the preference of Obama decreases by 0.053. support the hypothesis or not????????????????????
+
+
+\end{itemize}
+
+
+
+
+\item Does income have a statistically significant effect on the feelings toward Obama of those who aren't Democrats?  On the feelings of Democrats?  Report the estimated effect and $p$-value for each.\\
+
+\begin{Schunk}
+\begin{Sinput}
+> nondem<-ifelse(obama$dem==0,1,0)
+> m3<-lm(obama ~ income + nondem:income + age + educ + female + black + nondem,data=obama)
+> summary(m3)
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + nondem:income + age + educ + female + 
+    black + nondem, data = obama)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-77.075 -10.065   1.828  12.986  66.655 
+
+Coefficients:
+               Estimate Std. Error t value Pr(>|t|)    
+(Intercept)    75.67523    3.53907  21.383  < 2e-16 ***
+income          0.01925    0.01869   1.030   0.3032    
+age            -0.06819    0.03090  -2.207   0.0275 *  
+educ           -0.17733    0.21727  -0.816   0.4145    
+female          4.13791    1.02618   4.032 5.75e-05 ***
+black          18.35369    1.26215  14.542  < 2e-16 ***
+nondem        -13.51130    1.55414  -8.694  < 2e-16 ***
+income:nondem  -0.10446    0.02151  -4.858 1.29e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 21.67 on 1850 degrees of freedom
+  (465 observations deleted due to missingness)
+Multiple R-squared:  0.339,	Adjusted R-squared:  0.3365 
+F-statistic: 135.5 on 7 and 1850 DF,  p-value: < 2.2e-16
+\end{Soutput}
+\begin{Sinput}
+> ipak <- function(pkg){
++     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
++     if (length(new.pkg)) 
++         install.packages(new.pkg, dependencies = TRUE)
++     sapply(pkg, require, character.only = TRUE)
++ }
+> packages <- c("ggplot2", "RCurl", "arm")
+> ipak(packages)
+\end{Sinput}
+\begin{Soutput}
+ggplot2   RCurl     arm 
+   TRUE    TRUE    TRUE 
+\end{Soutput}
+\begin{Sinput}
+> m1
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + age + educ + female + black + dem + 
+    rep, data = obama)
+
+Coefficients:
+(Intercept)       income          age         educ       female        black  
+   60.20277     -0.03332     -0.03495      0.04891      4.48527     16.76626  
+        dem          rep  
+   13.76778    -16.71796  
+\end{Soutput}
+\begin{Sinput}
+> m2
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + dem + dem:income + age + educ + 
+    female + black, data = obama)
+
+Coefficients:
+(Intercept)       income          dem          age         educ       female  
+   62.16393     -0.08521     13.51130     -0.06819     -0.17733      4.13791  
+      black   income:dem  
+   18.35369      0.10446  
+\end{Soutput}
+\begin{Sinput}
+> m3
+\end{Sinput}
+\begin{Soutput}
+Call:
+lm(formula = obama ~ income + nondem:income + age + educ + female + 
+    black + nondem, data = obama)
+
+Coefficients:
+  (Intercept)         income            age           educ         female  
+     75.67523        0.01925       -0.06819       -0.17733        4.13791  
+        black         nondem  income:nondem  
+     18.35369      -13.51130       -0.10446  
+\end{Soutput}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Sinput}
+> library(stargazer)
+> stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude towards Barack Obama", align=TRUE, omit.stat=c("adj.rsq","f","ser"),label="T:res")
+\end{Sinput}
+% Table created by stargazer v.4.5.3 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Sat, Mar 01, 2014 - 2:18:01 PM
+% Requires LaTeX packages: dcolumn 
+\begin{table}[!htbp] \centering 
+  \caption{Linear regression Results} 
+  \label{T:res} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & \multicolumn{3}{c}{Attitude towards Barack Obama} \\ 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ income & -0.033^{***} & -0.085^{***} & 0.019 \\ 
+  & (0.010) & (0.012) & (0.019) \\ 
+  & & & \\ 
+ age & -0.035 & -0.068^{**} & -0.068^{**} \\ 
+  & (0.030) & (0.031) & (0.031) \\ 
+  & & & \\ 
+ educ & 0.049 & -0.177 & -0.177 \\ 
+  & (0.211) & (0.217) & (0.217) \\ 
+  & & & \\ 
+ female & 4.485^{***} & 4.138^{***} & 4.138^{***} \\ 
+  & (0.996) & (1.026) & (1.026) \\ 
+  & & & \\ 
+ black & 16.766^{***} & 18.354^{***} & 18.354^{***} \\ 
+  & (1.226) & (1.262) & (1.262) \\ 
+  & & & \\ 
+ income:dem &  & 0.104^{***} &  \\ 
+  &  & (0.022) &  \\ 
+  & & & \\ 
+ dem & 13.768^{***} & 13.511^{***} &  \\ 
+  & (1.145) & (1.554) &  \\ 
+  & & & \\ 
+ rep & -16.718^{***} &  &  \\ 
+  & (1.409) &  &  \\ 
+  & & & \\ 
+ nondem &  &  & -13.511^{***} \\ 
+  &  &  & (1.554) \\ 
+  & & & \\ 
+ income:nondem &  &  & -0.104^{***} \\ 
+  &  &  & (0.022) \\ 
+  & & & \\ 
+ Constant & 60.203^{***} & 62.164^{***} & 75.675^{***} \\ 
+  & (3.248) & (3.381) & (3.539) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{1,858} & \multicolumn{1}{c}{1,858} & \multicolumn{1}{c}{1,858} \\ 
+R$^{2}$ & \multicolumn{1}{c}{0.378} & \multicolumn{1}{c}{0.339} & \multicolumn{1}{c}{0.339} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\normalsize 
+\end{tabular} 
+\end{table} \end{Schunk}
+
+
+From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling, with a p-value 1.13e-05. But the siginificance of coefficient of income is not shown in m3 (with a p-value 0.42847), meaning that the income does not have signficant influence on feeling of Democrats.  
+
+
+
+\item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
+
+\begin{Schunk}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+\end{enumerate}
+\end{document}

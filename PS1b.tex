@@ -153,163 +153,48 @@ F-statistic: 22.83 on 8 and 1616 DF,  p-value: < 2.2e-16
 \end{Soutput}
 \end{Schunk}
 
+
 \begin{itemize}
   \item The answer to this question depends on how we operationalize "assessments of how well the PRI had governed lately" and "personal characteristics".  We decided to include the variables \texttt{econpers}, \texttt{econnat}, \texttt{corrupt}, and \texttt{crime} as control variables for assessment of PRI governance.  We expect to see a positive relationship with the first two and the dependent variable (as higher values of these variables correspond to greater feelings about overall economic situations), and a negative relationship with that last two and the dependent variable (as higher values in these variables indicate more of something negative, being corruption/crime).  In addition, we included variables \texttt{female}, \texttt{ses}, and \texttt{churchatt} as personal characteristic control variables.  The results are listed below in table 1, next to the base model established in the previous question.
   \end{itemize}
 
 \item Based on this model, which variable had the strongest estimated effect on respondents' preferences for the PRI over its opponents?  \\
 
-
-\begin{itemize}
-  \item Ideology
- 
-  \item Personal Econ.  
-  
-  \item National Econ.
-  
-  \item Corruption
-  
-  \item Crime
-  
-  \item Female
-  
-  \item SES
-  
-  \item Church Attendance
-  
-\end{itemize}
-
 \begin{Schunk}
 \begin{Sinput}
-> summary(mex)
+> mex.range <- apply(mex[,6:13], 2, function(x) max(x) - min(x)) 
+> max.effects <- mex.range * fit.2$coef[2:9]
+> max.effects
 \end{Sinput}
 \begin{Soutput}
-    PRIfeel          PANfeel          PRDfeel         prefPRI        
- Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   :-10.0000  
- 1st Qu.: 3.000   1st Qu.: 5.000   1st Qu.: 2.00   1st Qu.: -3.0000  
- Median : 6.000   Median : 6.000   Median : 5.00   Median :  0.0000  
- Mean   : 5.544   Mean   : 5.857   Mean   : 4.31   Mean   : -0.8837  
- 3rd Qu.: 8.000   3rd Qu.: 8.000   3rd Qu.: 6.00   3rd Qu.:  2.0000  
- Max.   :10.000   Max.   :10.000   Max.   :10.00   Max.   : 10.0000  
-    prefPAN            rightide         econpers        econnat     
- Min.   :-10.0000   Min.   : 0.000   Min.   :1.000   Min.   :1.000  
- 1st Qu.: -2.0000   1st Qu.: 5.000   1st Qu.:3.000   1st Qu.:2.000  
- Median :  0.0000   Median : 7.000   Median :3.000   Median :3.000  
- Mean   :  0.3132   Mean   : 6.447   Mean   :3.008   Mean   :2.815  
- 3rd Qu.:  2.0000   3rd Qu.:10.000   3rd Qu.:3.000   3rd Qu.:3.000  
- Max.   : 10.0000   Max.   :10.000   Max.   :5.000   Max.   :5.000  
-    corrupt          crime           female            ses       
- Min.   :1.000   Min.   :1.000   Min.   :0.0000   Min.   :1.000  
- 1st Qu.:3.000   1st Qu.:3.000   1st Qu.:0.0000   1st Qu.:2.000  
- Median :3.000   Median :3.000   Median :0.0000   Median :2.000  
- Mean   :3.327   Mean   :3.014   Mean   :0.4966   Mean   :2.582  
- 3rd Qu.:4.000   3rd Qu.:4.000   3rd Qu.:1.0000   3rd Qu.:3.000  
- Max.   :5.000   Max.   :5.000   Max.   :1.0000   Max.   :6.000  
-   churchatt    
- Min.   :1.000  
- 1st Qu.:2.000  
- Median :3.000  
- Mean   :3.177  
- 3rd Qu.:4.000  
- Max.   :5.000  
-\end{Soutput}
-\begin{Sinput}
-> # Ideology
-> id1 <- -2.19022 + .26599*0 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> id2 <- -2.19022 + .26599*10 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> ideoSub <- abs(id1-id2)
-> # Personal Econ
-> pe1 <- -2.19022 + .26599*6.447 + .14302*1 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> pe2 <- -2.19022 + .26599*6.447 + .14302*5 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> persSub <- abs(pe1-pe2)
-> # National Econ
-> ne1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*1 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> ne2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*5 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> natSub <- abs(ne1-ne2)
-> # Corruption
-> corr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*1 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> corr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*5 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> corrSub <- abs(corr1-corr2)
-> # Crime
-> cr1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*1 + .72701*0 - .33258*2.582 - .15010*3.177
-> cr2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*5 + .72701*0 - .33258*2.582 - .15010*3.177
-> crimSub <- abs(cr1-cr2)
-> # Female
-> fem1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*3.177
-> fem2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*1 - .33258*2.582 - .15010*3.177
-> femSub <- abs(fem1-fem2)
-> # SES
-> ses1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*1 - .15010*3.177
-> ses2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*6 - .15010*3.177
-> sesSub <- abs(ses1-ses2)
-> # Church Attendance
-> chu1 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*1
-> chu2 <- -2.19022 + .26599*6.447 + .14302*3.008 + .72776*2.815 - .35553*3.327 -
-+   .24213*3.014 + .72701*0 - .33258*2.582 - .15010*5
-> churchSub <- abs(chu1-chu2)
-> ideoSub
-\end{Sinput}
-\begin{Soutput}
-[1] 2.6599
-\end{Soutput}
-\begin{Sinput}
-> persSub
-\end{Sinput}
-\begin{Soutput}
-[1] 0.57208
-\end{Soutput}
-\begin{Sinput}
-> natSub
-\end{Sinput}
-\begin{Soutput}
-[1] 2.91104
-\end{Soutput}
-\begin{Sinput}
-> corrSub
-\end{Sinput}
-\begin{Soutput}
-[1] 1.42212
-\end{Soutput}
-\begin{Sinput}
-> crimSub
-\end{Sinput}
-\begin{Soutput}
-[1] 0.96852
-\end{Soutput}
-\begin{Sinput}
-> femSub
-\end{Sinput}
-\begin{Soutput}
-[1] 0.72701
-\end{Soutput}
-\begin{Sinput}
-> sesSub
-\end{Sinput}
-\begin{Soutput}
-[1] 1.6629
-\end{Soutput}
-\begin{Sinput}
-> churchSub
-\end{Sinput}
-\begin{Soutput}
-[1] 0.6004
+  rightide   econpers    econnat    corrupt      crime     female        ses 
+ 2.6598935  0.5720867  2.9110459 -1.4221380 -0.9685283  0.7270080 -1.6629054 
+ churchatt 
+-0.6003895 
 \end{Soutput}
 \end{Schunk}
+
+
+\begin{itemize}
+ \item To determine the strongest estimated effect we looked at the effect of moving from the min to the max for each variable using the apply() function in R. As we can see, people's perception of the national economic situation has the strongest substanive effect on their preference for PRI over other parties(\textttt{2.91104}), followed by personal ideology(\texttt{2.6599}), social-economic status(\texttt{1.6629}) and perception of goverenment corruption(\texttt{1.42212}). Personal economic situation has the smallest substantive effect on preference for PRI.
+
+\begin{center}
+    \begin{tabular}{ | l | l |}
+    \hline
+    Variable & Effect of Substance \\ \hline
+    ideoSub & 2.6599 \\ \hline
+    perSub & 0.57208 \\ \hline
+    natSub & 2.91104 \\ \hline
+    corrSub & 1.42212 \\ \hline
+    crimeSub & 0.96852 \\ \hline
+    femSub & 0.72701 \\ \hline
+    sesSub & 1.6629 \\ \hline
+    churchSub & 0.6004 \\ 
+    \hline
+    \end{tabular}
+\end{center}
+
+
 
 \end{enumerate}
 \end{document}

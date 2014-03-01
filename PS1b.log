@@ -1,15 +1,15 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.8.28)  8 FEB 2014 12:10
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.19)  20 FEB 2014 10:17
 entering extended mode
 **PS1b.tex
-(C:\Users\Kellen\Documents\GitHub\teamb\PS1b.tex
+(C:\Users\kellengracey\Documents\GitHub\teamb\PS1b.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
 croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
-lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
 ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
  lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
-german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
 ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
 an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
 ishmax, welsh, loaded.
@@ -34,7 +34,7 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
 )
-(C:/PROGRA~1/R/R-30~1.2/share/texmf/tex/latex\Sweave.sty
+(C:\Users\kellengracey\Documents\GitHub\teamb\Sweave.sty
 Package: Sweave 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
@@ -187,7 +187,7 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aer.fd"
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
-(C:\Users\Kellen\Documents\GitHub\teamb\PS1b.aux)
+(C:\Users\kellengracey\Documents\GitHub\teamb\PS1b.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
 LaTeX Font Info:    ... okay on input line 5.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
@@ -221,7 +221,7 @@ LaTeX Font Info:    ... okay on input line 5.
 \MPnumerator=\count95
 \makeMPintoPDFobject=\count96
 \everyMPtoPDFconversion=\toks16
-) (C:\Users\Kellen\Documents\GitHub\teamb\PS1b-concordance.tex)
+) (C:\Users\kellengracey\Documents\GitHub\teamb\PS1b-concordance.tex)
 LaTeX Font Info:    Try loading font information for T1+aett on input line 14.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
@@ -267,31 +267,76 @@ Underfull \hbox (badness 10000) in paragraph at lines 119--120
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+Underfull \hbox (badness 10000) in paragraph at lines 161--162
 
  []
 
-[4] [5] [6] [7] (C:\Users\Kellen\Documents\GitHub\teamb\PS1b.aux) ) 
+! Undefined control sequence.
+l.179 ...rence for PRI over other parties(\textttt
+                                                  {2.91104}), followed by pe...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 182.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 182.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 182.
+[4]
+
+! LaTeX Error: \begin{itemize} on input line 178 ended by \end{enumerate}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.199 \end{enumerate}
+                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+! LaTeX Error: \begin{enumerate} on input line 57 ended by \end{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.200 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[5] (C:\Users\kellengracey\Documents\GitHub\teamb\PS1b.aux) )
+(\end occurred inside a group at level 1)
+
+### semi simple group (level 1) entered at line 57 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 2381 strings out of 493921
- 33729 string characters out of 3144873
- 79423 words of memory out of 3000000
- 5648 multiletter control sequences out of 15000+200000
- 16923 words of font info for 39 fonts, out of 3000000 for 9000
+ 2398 strings out of 493921
+ 33749 string characters out of 3144855
+ 80423 words of memory out of 3000000
+ 5659 multiletter control sequences out of 15000+200000
+ 18746 words of font info for 45 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 35i,4n,21p,950b,361s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\K
-ellen\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.pk> 
-<C:\Users\Kellen\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tc
-tt1200.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmb
-x12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.p
-fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb
->
-Output written on PS1b.pdf (7 pages, 88168 bytes).
+ 35i,6n,21p,950b,347s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\kellengracey\AppData\Local\MiKTeX\2.9\fonts\pk\ljfou
+r\jknappen\ec\dpi600\tcrm1200.pk> <C:\Users\kellengracey\AppData\Local\MiKTeX\2
+.9\fonts\pk\ljfour\jknappen\ec\dpi600\tctt1200.pk><C:/Program Files (x86)/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 
+2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files (x86)/MiKTeX 2.9
+/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86)/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on PS1b.pdf (5 pages, 85218 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
+ 49 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  5 words of extra memory for PDF output out of 10000 (max. 10000000)
 

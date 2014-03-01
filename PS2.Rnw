@@ -15,7 +15,7 @@ The dataset \texttt{Obama.dta} is a subset of the 2008 American National Electio
 <<label=Setup>>=
 # Setup
 library(foreign)
-obama<-read.dta("C:\\Users\\Dong\\Desktop\\intermediate method-Spring 2014\\ProblemSet\\ProblemSet2\\Obama.dta")
+obama<-read.dta("Obama.dta")
 
 require(foreign)
 obama <- read.dta("Obama.dta")
@@ -29,7 +29,7 @@ data.key
 \item Suppose we hypothesize that a respondent's income affects her or his attitudes toward Obama, that those with higher incomes will express cooler feelings toward him.  Controlling for age, education, gender, race, and partisanship, is this hypothesis supported?  How do you know?
 
 <<label=Answer1>>=
-m1<-lm(obama ~ age + income + educ + female + black + dem + rep,data=obama)
+m1<-lm(obama ~ income + age + educ + female + black + dem + rep,data=obama)
 summary(m1)
 
 @
@@ -44,7 +44,7 @@ As we can see "income=-0.03332" from the table 1, when controlling all other var
 \item Suppose we think Democrats' feelings toward Obama will be less influenced by their incomes than others' feelings are.  Is there support for this conditional hypothesis?  How do you know?\\
 
 <<label=Answer2>>=
-m2<-lm(obama ~ age + income + dem:income + educ + female + black + dem + rep,data=obama)
+m2<-lm(obama ~ income + dem + dem:income + age + educ + female + black, data=obama)
 summary(m2)
 
 @
@@ -64,7 +64,7 @@ As we can see "income=-0.053484" from the table 1, when considering the intereac
 <<label=Answer3>>=
 nondem<-ifelse(obama$dem==0,1,0)
 
-m3<-lm(obama ~ age + income + nondem:income + educ + female + black + nondem + rep,data=obama)
+m3<-lm(obama ~ income + nondem:income + age + educ + female + black + nondem,data=obama)
 summary(m3)
 
 ipak <- function(pkg){
@@ -80,13 +80,14 @@ ipak(packages)
 m1
 m2
 m3
-
 @
-<<label=Table1, results=tex,echo=FALSE>>=
+
+<<label=Table1, results=tex,echo=T>>=
+library(stargazer)
 stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude towards Barack Obama", align=TRUE, omit.stat=c("adj.rsq","f","ser"),label="T:res")
-
-
 @
+
+
 From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling, with a p-value 1.13e-05. But the siginificance of coefficient of income is not shown in m3 (with a p-value 0.42847), meaning that the income does not have signficant influence on feeling of Democrats.  
 
 
