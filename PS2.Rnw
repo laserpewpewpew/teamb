@@ -14,9 +14,6 @@ The dataset \texttt{Obama.dta} is a subset of the 2008 American National Electio
 
 <<label=Setup>>=
 # Setup
-library(foreign)
-obama<-read.dta("Obama.dta")
-
 require(foreign)
 obama <- read.dta("Obama.dta")
 
@@ -77,9 +74,6 @@ ipak <- function(pkg){
 packages <- c("ggplot2", "RCurl", "arm")
 ipak(packages)
 
-m1
-m2
-m3
 @
 
 <<label=Table1, results=tex,echo=T>>=
@@ -88,13 +82,40 @@ stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude to
 @
 
 
-From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling, with a p-value 1.13e-05. But the siginificance of coefficient of income is not shown in m3 (with a p-value 0.42847), meaning that the income does not have signficant influence on feeling of Democrats.  
+From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling (coefficient:-0.08521;p-value:4.12e-13). But the siginificance of coefficient of income is not shown in m3 (coefficient:0.01925; p-value:0.3032), meaning that the income does not have signficant influence on feeling of Democrats.  
 
 
 
 \item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
 
 <<label=Answer4>>=
+##Erico: I am confused here. Based on the question, which coefficient we should run a simulation for? Coef.income or Coef.nondem (or Coef.dem if we use m2)
+
+set.seed(740)
+n.sims<-1988
+m3.sims <- sim(m3, n.sims)
+apply(m3.sims@coef, 2, mean)
+
+
+coef.no.intercept<-m3.sims@coef[,2:8]
+coef.income<-data.frame(fake_nondem=seq(min(obama$nondem),max(obama$nondem),length.out=100),coef_income=NA, ub_income=NA, lb_income=NA)
+
+for(i in 1:100){coef.income$coef_income[i]<-mean(m3.sims@coef[,])}
+
+for(i in 1:100) {   
+    coef.income$coef_income[i] <- mean(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8])
+    coef.income$ub_income[i] <- quantile(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8], .975)
+    coef.income$lb_income[i] <- quantile(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8], .025)    
+}
+
+View(coef.income)
+income.coef.plot<-ggplot(coef.income,aes(x=fake_nondem,y=coef_income))+
+        geom_line()+geom_ribbon(aes(ymin=lb_income,ymax=ub_income),alpha=.5)+ 
+                                 xlab("Democrat")+
+                                 ylab("Coefficient for Income")+
+                                 scale_x_continuous(limits=c(0,80))
+gini.coef.plot
+
 
 @
 
