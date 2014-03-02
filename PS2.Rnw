@@ -89,7 +89,7 @@ From the result of m2 and m3 in table 2, we can see income has a statistically s
 \item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
 
 <<label=Answer4>>=
-##Erico: I am confused here. Based on the question, which coefficient we should run a simulation for? Coef.income or Coef.nondem (or Coef.dem if we use m2)
+##Erico: I am confused here. Based on the question, which coefficient we should run a simulation for:Coef.income or Coef.nondem (or Coef.dem if we use m2)?
 
 set.seed(740)
 n.sims<-1988
