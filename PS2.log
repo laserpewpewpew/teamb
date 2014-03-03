@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.19)  1 MAR 2014 14:18
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.2.19)  3 MAR 2014 10:57
 entering extended mode
 **PS2.tex
 (C:\Users\kellengracey\Documents\GitHub\teamb\PS2.tex
@@ -34,12 +34,6 @@ File: size12.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 Package: fullpage 1999/02/23 1.1 (PWD)
 \FP@margin=\skip43
 )
-(C:\Users\kellengracey\Documents\GitHub\teamb\Sweave.sty
-Package: Sweave 
-
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
-Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
-)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -71,6 +65,12 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 ))
 \Gin@req@height=\dimen103
 \Gin@req@width=\dimen104
+)
+(C:\Users\kellengracey\Documents\GitHub\teamb\Sweave.sty
+Package: Sweave 
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
 Package: fancyvrb 2008/02/07
@@ -188,25 +188,25 @@ LaTeX Font Info:    Try loading font information for T1+aer on input line 100.
 File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 ))))
 (C:\Users\kellengracey\Documents\GitHub\teamb\PS2.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 6.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    ... okay on input line 6.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -222,52 +222,45 @@ LaTeX Font Info:    ... okay on input line 5.
 \makeMPintoPDFobject=\count96
 \everyMPtoPDFconversion=\toks16
 ) (C:\Users\kellengracey\Documents\GitHub\teamb\PS2-concordance.tex)
-LaTeX Font Info:    Try loading font information for T1+aett on input line 14.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 15.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ae\t1aett.fd"
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 ) [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for TS1+aett on input line 68.
+LaTeX Font Info:    Try loading font information for TS1+aett on input line 67.
 
 
 (C:/PROGRA~1/R/R-30~1.2/share/texmf/tex/latex\ts1aett.fd
 File: ts1aett.fd 
 )
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 68.
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 67.
 
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 68.
-LaTeX Font Info:    Try loading font information for TS1+aer on input line 80.
+(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 67.
 
-(C:/PROGRA~1/R/R-30~1.2/share/texmf/tex/latex\ts1aer.fd
-File: ts1aer.fd 
-)
-LaTeX Font Info:    Font shape `TS1/aer/m/n' in size <12> not available
-(Font)              Font shape `TS1/cmr/m/n' tried instead on input line 80.
-
-Underfull \hbox (badness 10000) in paragraph at lines 86--87
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
 [2]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 135.
+(Font)              <12> on input line 127.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 135.
+(Font)              <8> on input line 127.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 135.
+(Font)              <6> on input line 127.
 
-Underfull \hbox (badness 10000) in paragraph at lines 135--136
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
 
  []
 
-[3] [4]
+[3]
 
 ! LaTeX Error: Illegal character in array arg.
 
@@ -275,7 +268,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -287,7 +280,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -299,7 +292,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -311,7 +304,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -323,7 +316,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -335,7 +328,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -347,7 +340,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -359,7 +352,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -371,7 +364,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -383,7 +376,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -395,7 +388,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -407,7 +400,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.239 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
+l.175 ...t}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }
                                                   
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -415,16 +408,16 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.247  income & -0.033^
-                       {***} & -0.085^{***} & 0.019 \\
+l.183  income & -0.033^
+                       {***} & -0.053^{***} & 0.019 \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.247  income & -0.033^{***} &
-                               -0.085^{***} & 0.019 \\
+l.183  income & -0.033^{***} &
+                               -0.053^{***} & 0.019 \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -434,16 +427,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.247  income & -0.033^{***} &
-                               -0.085^{***} & 0.019 \\
+l.183  income & -0.033^{***} &
+                               -0.053^{***} & 0.019 \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.247  income & -0.033^{***} &
-                               -0.085^{***} & 0.019 \\
+l.183  income & -0.033^{***} &
+                               -0.053^{***} & 0.019 \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -453,7 +446,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.247  income & -0.033^{***} & -0.085^
+l.183  income & -0.033^{***} & -0.053^
                                       {***} & 0.019 \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -461,7 +454,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.247  income & -0.033^{***} & -0.085^{***} &
+l.183  income & -0.033^{***} & -0.053^{***} &
                                               0.019 \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -472,7 +465,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.247  income & -0.033^{***} & -0.085^{***} &
+l.183  income & -0.033^{***} & -0.053^{***} &
                                               0.019 \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -480,7 +473,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.247  income & -0.033^{***} & -0.085^{***} &
+l.183  income & -0.033^{***} & -0.053^{***} &
                                               0.019 \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -491,16 +484,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.250  age & -0.035 & -0.068^
-                             {**} & -0.068^{**} \\
+l.186  age & -0.035 & -0.030 & -0.068^
+                                      {**} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.250  age & -0.035 & -0.068^{**} &
-                                    -0.068^{**} \\
+l.187   &
+          (0.030) & (0.030) & (0.031) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -510,16 +503,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.250  age & -0.035 & -0.068^{**} &
-                                    -0.068^{**} \\
+l.187   &
+          (0.030) & (0.030) & (0.031) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.250  age & -0.035 & -0.068^{**} &
-                                    -0.068^{**} \\
+l.187   &
+          (0.030) & (0.030) & (0.031) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -529,16 +522,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.250  age & -0.035 & -0.068^{**} & -0.068^
-                                           {**} \\
+l.192  female & 4.485^
+                      {***} & 4.433^{***} & 4.138^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.251   &
-          (0.030) & (0.031) & (0.031) \\
+l.192  female & 4.485^{***} &
+                              4.433^{***} & 4.138^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -548,16 +541,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.251   &
-          (0.030) & (0.031) & (0.031) \\
+l.192  female & 4.485^{***} &
+                              4.433^{***} & 4.138^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.251   &
-          (0.030) & (0.031) & (0.031) \\
+l.192  female & 4.485^{***} &
+                              4.433^{***} & 4.138^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -567,45 +560,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.256  female & 4.485^
-                      {***} & 4.138^{***} & 4.138^{***} \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-<template> \unskip \hfil }
-                          \hskip \tabcolsep \endtemplate 
-l.256  female & 4.485^{***} &
-                              4.138^{***} & 4.138^{***} \\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.256  female & 4.485^{***} &
-                              4.138^{***} & 4.138^{***} \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.256  female & 4.485^{***} &
-                              4.138^{***} & 4.138^{***} \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.256  female & 4.485^{***} & 4.138^
+l.192  female & 4.485^{***} & 4.433^
                                     {***} & 4.138^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -613,7 +568,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.256  female & 4.485^{***} & 4.138^{***} &
+l.192  female & 4.485^{***} & 4.433^{***} &
                                             4.138^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -624,7 +579,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.256  female & 4.485^{***} & 4.138^{***} &
+l.192  female & 4.485^{***} & 4.433^{***} &
                                             4.138^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -632,7 +587,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.256  female & 4.485^{***} & 4.138^{***} &
+l.192  female & 4.485^{***} & 4.433^{***} &
                                             4.138^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -643,7 +598,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.256  female & 4.485^{***} & 4.138^{***} & 4.138^
+l.192  female & 4.485^{***} & 4.433^{***} & 4.138^
                                                   {***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -651,8 +606,8 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.257   &
-          (0.996) & (1.026) & (1.026) \\
+l.193   &
+          (0.996) & (0.993) & (1.026) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -662,16 +617,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.257   &
-          (0.996) & (1.026) & (1.026) \\
+l.193   &
+          (0.996) & (0.993) & (1.026) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.257   &
-          (0.996) & (1.026) & (1.026) \\
+l.193   &
+          (0.996) & (0.993) & (1.026) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -681,16 +636,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.259  black & 16.766^
-                      {***} & 18.354^{***} & 18.354^{***} \\
+l.195  black & 16.766^
+                      {***} & 17.071^{***} & 18.354^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.259  black & 16.766^{***} &
-                              18.354^{***} & 18.354^{***} \\
+l.195  black & 16.766^{***} &
+                              17.071^{***} & 18.354^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -700,16 +655,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.259  black & 16.766^{***} &
-                              18.354^{***} & 18.354^{***} \\
+l.195  black & 16.766^{***} &
+                              17.071^{***} & 18.354^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.259  black & 16.766^{***} &
-                              18.354^{***} & 18.354^{***} \\
+l.195  black & 16.766^{***} &
+                              17.071^{***} & 18.354^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -719,7 +674,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.259  black & 16.766^{***} & 18.354^
+l.195  black & 16.766^{***} & 17.071^
                                      {***} & 18.354^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -727,7 +682,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.259  black & 16.766^{***} & 18.354^{***} &
+l.195  black & 16.766^{***} & 17.071^{***} &
                                              18.354^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -738,7 +693,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.259  black & 16.766^{***} & 18.354^{***} &
+l.195  black & 16.766^{***} & 17.071^{***} &
                                              18.354^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -746,7 +701,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.259  black & 16.766^{***} & 18.354^{***} &
+l.195  black & 16.766^{***} & 17.071^{***} &
                                              18.354^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -757,7 +712,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.259 ...k & 16.766^{***} & 18.354^{***} & 18.354^
+l.195 ...k & 16.766^{***} & 17.071^{***} & 18.354^
                                                   {***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -765,8 +720,8 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.260   &
-          (1.226) & (1.262) & (1.262) \\
+l.196   &
+          (1.226) & (1.227) & (1.262) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -776,16 +731,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.260   &
-          (1.226) & (1.262) & (1.262) \\
+l.196   &
+          (1.226) & (1.227) & (1.262) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.260   &
-          (1.226) & (1.262) & (1.262) \\
+l.196   &
+          (1.226) & (1.227) & (1.262) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -795,7 +750,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.262  income:dem &  & 0.104^
+l.198  income:dem &  & 0.068^
                              {***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -803,7 +758,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.262  income:dem &  & 0.104^{***} &
+l.198  income:dem &  & 0.068^{***} &
                                       \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -814,7 +769,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.262  income:dem &  & 0.104^{***} &
+l.198  income:dem &  & 0.068^{***} &
                                       \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -822,7 +777,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.262  income:dem &  & 0.104^{***} &
+l.198  income:dem &  & 0.068^{***} &
                                       \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -833,16 +788,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.265  dem & 13.768^
-                    {***} & 13.511^{***} &  \\
+l.201  dem & 13.768^
+                    {***} & 10.504^{***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.265  dem & 13.768^{***} &
-                            13.511^{***} &  \\
+l.201  dem & 13.768^{***} &
+                            10.504^{***} &  \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -852,16 +807,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.265  dem & 13.768^{***} &
-                            13.511^{***} &  \\
+l.201  dem & 13.768^{***} &
+                            10.504^{***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.265  dem & 13.768^{***} &
-                            13.511^{***} &  \\
+l.201  dem & 13.768^{***} &
+                            10.504^{***} &  \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -871,7 +826,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.265  dem & 13.768^{***} & 13.511^
+l.201  dem & 13.768^{***} & 10.504^
                                    {***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -879,7 +834,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.265  dem & 13.768^{***} & 13.511^{***} &
+l.201  dem & 13.768^{***} & 10.504^{***} &
                                             \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -890,7 +845,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.265  dem & 13.768^{***} & 13.511^{***} &
+l.201  dem & 13.768^{***} & 10.504^{***} &
                                             \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -898,7 +853,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.265  dem & 13.768^{***} & 13.511^{***} &
+l.201  dem & 13.768^{***} & 10.504^{***} &
                                             \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -909,16 +864,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.268  rep & -16.718^
-                     {***} &  &  \\
+l.204  rep & -16.718^
+                     {***} & -16.010^{***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.268  rep & -16.718^{***} &
-                              &  \\
+l.204  rep & -16.718^{***} &
+                             -16.010^{***} &  \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -928,16 +883,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.268  rep & -16.718^{***} &
-                              &  \\
+l.204  rep & -16.718^{***} &
+                             -16.010^{***} &  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.268  rep & -16.718^{***} &
-                              &  \\
+l.204  rep & -16.718^{***} &
+                             -16.010^{***} &  \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -947,7 +902,45 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.271  nondem &  &  & -13.511^
+l.204  rep & -16.718^{***} & -16.010^
+                                     {***} &  \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Extra }, or forgotten $.
+<template> \unskip \hfil }
+                          \hskip \tabcolsep \endtemplate 
+l.204  rep & -16.718^{***} & -16.010^{***} &
+                                              \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.204  rep & -16.718^{***} & -16.010^{***} &
+                                              \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing } inserted.
+<inserted text> 
+                }
+l.204  rep & -16.718^{***} & -16.010^{***} &
+                                              \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.207  nondem &  &  & -13.511^
                               {***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -955,7 +948,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.272   &
+l.208   &
            &  & (1.554) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -966,7 +959,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.272   &
+l.208   &
            &  & (1.554) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -974,7 +967,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.272   &
+l.208   &
            &  & (1.554) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -985,7 +978,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.274  income:nondem &  &  & -0.104^
+l.210  income:nondem &  &  & -0.104^
                                     {***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -993,7 +986,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.275   &
+l.211   &
            &  & (0.022) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1004,7 +997,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.275   &
+l.211   &
            &  & (0.022) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1012,7 +1005,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.275   &
+l.211   &
            &  & (0.022) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1023,16 +1016,16 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.277  Constant & 60.203^
-                         {***} & 62.164^{***} & 75.675^{***} \\
+l.213  Constant & 60.203^
+                         {***} & 61.667^{***} & 75.675^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.277  Constant & 60.203^{***} &
-                                 62.164^{***} & 75.675^{***} \\
+l.213  Constant & 60.203^{***} &
+                                 61.667^{***} & 75.675^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -1042,16 +1035,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.277  Constant & 60.203^{***} &
-                                 62.164^{***} & 75.675^{***} \\
+l.213  Constant & 60.203^{***} &
+                                 61.667^{***} & 75.675^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.277  Constant & 60.203^{***} &
-                                 62.164^{***} & 75.675^{***} \\
+l.213  Constant & 60.203^{***} &
+                                 61.667^{***} & 75.675^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -1061,7 +1054,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.277  Constant & 60.203^{***} & 62.164^
+l.213  Constant & 60.203^{***} & 61.667^
                                         {***} & 75.675^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1069,7 +1062,7 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.277  Constant & 60.203^{***} & 62.164^{***} &
+l.213  Constant & 60.203^{***} & 61.667^{***} &
                                                 75.675^{***} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -1080,7 +1073,7 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.277  Constant & 60.203^{***} & 62.164^{***} &
+l.213  Constant & 60.203^{***} & 61.667^{***} &
                                                 75.675^{***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1088,7 +1081,7 @@ you left one out. Proceed, with fingers crossed.
 ! Missing } inserted.
 <inserted text> 
                 }
-l.277  Constant & 60.203^{***} & 62.164^{***} &
+l.213  Constant & 60.203^{***} & 61.667^{***} &
                                                 75.675^{***} \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -1099,7 +1092,7 @@ my insertion and my current dilemma will both disappear.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.277 ...t & 60.203^{***} & 62.164^{***} & 75.675^
+l.213 ...t & 60.203^{***} & 61.667^{***} & 75.675^
                                                   {***} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
@@ -1107,8 +1100,8 @@ you left one out. Proceed, with fingers crossed.
 ! Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.278   &
-          (3.248) & (3.381) & (3.539) \\
+l.214   &
+          (3.248) & (3.272) & (3.539) \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -1118,16 +1111,16 @@ deleted material, e.g., by typing `I$}'.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.278   &
-          (3.248) & (3.381) & (3.539) \\
+l.214   &
+          (3.248) & (3.272) & (3.539) \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.278   &
-          (3.248) & (3.381) & (3.539) \\
+l.214   &
+          (3.248) & (3.272) & (3.539) \\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -1135,37 +1128,41 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-LaTeX Warning: Float too large for page by 23.24402pt on input line 288.
+LaTeX Warning: Float too large for page by 23.24402pt on input line 224.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 295--296
+Underfull \hbox (badness 10000) in paragraph at lines 231--232
 
  []
 
-[5] [6] (C:\Users\kellengracey\Documents\GitHub\teamb\PS2.aux) ) 
+[4] [5] <Rplots.pdf, id=27, 505.89pt x 505.89pt>
+File: Rplots.pdf Graphic file (type pdf)
+ <use Rplots.pdf>
+Package pdftex.def Info: Rplots.pdf used on input line 284.
+(pdftex.def)             Requested size: 375.80544pt x 375.81166pt.
+ [6] [7 <C:/Users/kellengracey/Documents/GitHub/teamb/Rplots.pdf>]
+(C:\Users\kellengracey\Documents\GitHub\teamb\PS2.aux) ) 
 Here is how much of TeX's memory you used:
- 2404 strings out of 493921
- 33854 string characters out of 3144855
- 85431 words of memory out of 3000000
- 5662 multiletter control sequences out of 15000+200000
- 20896 words of font info for 48 fonts, out of 3000000 for 9000
+ 2386 strings out of 493921
+ 33539 string characters out of 3144855
+ 86431 words of memory out of 3000000
+ 5647 multiletter control sequences out of 15000+200000
+ 20559 words of font info for 47 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 35i,9n,21p,407b,362s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\kell
-engracey\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1200.p
-k> <C:\Users\kellengracey\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\
-dpi600\tctt1200.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmmi12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mr8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmslt
-t10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8
-.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.p
-fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb
->
-Output written on PS2.pdf (6 pages, 110492 bytes).
+ 35i,9n,21p,466b,362s stack positions out of 5000i,500n,10000p,200000b,50000s
+ <C:\Users\kellengracey
+\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\tctt1200.pk><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsltt10.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x86
+)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on PS2.pdf (7 pages, 118987 bytes).
 PDF statistics:
- 64 PDF objects out of 1000 (max. 8388607)
+ 73 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 5 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 10 words of extra memory for PDF output out of 10000 (max. 10000000)
 

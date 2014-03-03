@@ -1,5 +1,6 @@
 \documentclass[12pt]{article}
 \usepackage{fullpage}
+\usepackage{graphicx}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
@@ -30,31 +31,23 @@ m1<-lm(obama ~ income + age + educ + female + black + dem + rep,data=obama)
 summary(m1)
 
 @
-\begin{itemize}
-  \item In order to test the hypothesis, we create a linear regression to see whether there is any correlation between the income of a respondent and his or her attitude toward Obama ot not by seting Obama feeling theromometer(variable:obama) as the dependent variable and all other fators as independent variables. 
-As we can see "income=-0.03332" from the table 1, when controlling all other variables, the income of a respondent has a significant effect on his or her atttitude towards Obama. With an increament of one thousands dollar in personal income, the preference of Obama decreases by 0.033.Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
-\end{itemize}
-
+In order to test the hypothesis we use linear regression to see whether there is any relationship between the income of a respondent and his or her attitude toward Obama.  The Obama feeling theromometer (variable:obama) is set as the dependent variable . 
+As we can see "income=-0.03332" from these results, the income of a respondent has a statistically significant effect on his or her atttitude towards Obama. With an increment of one thousands dollars in personal income, feeling towards Obama decreases by 0.033.  Thus the result supports our hypothesis that those with higher incomes will express cooler feelings toward him.
 
 @
 
 \item Suppose we think Democrats' feelings toward Obama will be less influenced by their incomes than others' feelings are.  Is there support for this conditional hypothesis?  How do you know?\\
 
 <<label=Answer2>>=
-m2<-lm(obama ~ income + dem + dem:income + age + educ + female + black, data=obama)
+m2<-lm(obama ~ income + dem + dem:income + rep + age + educ + female + black, data=obama)
 summary(m2)
 
 @
-\begin{itemize}
-  \item In order to test the conditional hypothesis and see how the Democrat identity influences the effect of income on attitude toward Obama, we add an interaction term of "dem:income" as an additional independent variable into the linear model.  
+In order to test the conditional hypothesis and see how being a Democrat influences the effect of income on feelings toward Obama, we add an interaction term of "dem*income" as an additional independent variable into the linear model.  
   
-As we can see "income=-0.053484" from the table 1, when considering the intereaction between income and the Democratic identity, there exists a significant effect that fora non-Democrats (dem=0), when personal income increases by a thousand dollar, the preference of Obama decreases by 0.053. support the hypothesis or not????????????????????
+As we can see "income=-0.053484" and "income:dem=.067813".  To calculate the effect of income on Democrats we simply add the coefficient for the interaction term to the coefficient for the constitutive term: -.053484 + .067813 = .014329.  The effect of income when dem = 0 is the coefficient for income, -.053484.  Not only is there a much smaller effect of income for Democrats on feelings toward Obama, the effect is in the opposite, positive direction.
 
-
-\end{itemize}
-
-
-
+These results support our hypothesis that Democrats are less influence by their incomes than others' feelings are when considering feelings toward Obama.
 
 \item Does income have a statistically significant effect on the feelings toward Obama of those who aren't Democrats?  On the feelings of Democrats?  Report the estimated effect and $p$-value for each.\\
 
@@ -63,17 +56,6 @@ nondem<-ifelse(obama$dem==0,1,0)
 
 m3<-lm(obama ~ income + nondem:income + age + educ + female + black + nondem,data=obama)
 summary(m3)
-
-ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)) 
-        install.packages(new.pkg, dependencies = TRUE)
-    sapply(pkg, require, character.only = TRUE)
-}
-
-packages <- c("ggplot2", "RCurl", "arm")
-ipak(packages)
-
 @
 
 <<label=Table1, results=tex,echo=T>>=
@@ -82,13 +64,15 @@ stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude to
 @
 
 
-From the result of m2 and m3 in table 2, we can see income has a statistically significant effect on non-Democrats feeling (coefficient:-0.08521;p-value:4.12e-13). But the siginificance of coefficient of income is not shown in m3 (coefficient:0.01925; p-value:0.3032), meaning that the income does not have signficant influence on feeling of Democrats.  
+From these results we can see income has a statistically significant effect on non-Democrats feeling towards Obama (coefficient:-0.10446). For every thousand dollar increase in income feeling towards Obama decreases by .10446 among non-Democrats, an effect significant at the .05 level.  
 
-
+Using this coding scheme for partisanship we see our results from Question 2 verified in this model: the coefficient for income (when nondem=0, or for Democratic respondents) is equal to .019, roughly the size of the coefficient estimated earlier.  In addition, this effect is not statistically significant.  That is, income does not influence feelings toward Obama among Democrats in this model.  It does, however, influence non-Democrats.  
 
 \item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
 
 <<label=Answer4>>=
+library(arm)
+library(ggplot2)
 set.seed(740)
 n.sims=9999
 m2.sims <- sim(m2, n.sims)
@@ -108,11 +92,15 @@ for(i in 1:100) {
 dem.coef.plot <- ggplot(coef.dem, aes(x = fake_income, y = coef_dem)) + 
     geom_line() + geom_ribbon(aes(ymin=lb_dem, ymax=ub_dem), alpha=.5) +
     xlab("Household income, $000s") + ylab("Coefficient of Democrats") +
-    scale_x_continuous(limits=c(0,80))
+    scale_x_continuous(limits=c(0,80)) + 
+    scale_y_continuous(limits=c(0,2000))
 
 dem.coef.plot
-
 @
+
+\includegraphics{Rplots.pdf}
+
+From the simulated results we graphed income against the coefficient for the dem variable, including 95\% confidence intervals.  There appears to be a positive effect of income for Democrats on feelings toward Obama.
 
 \end{enumerate}
 \end{document}
