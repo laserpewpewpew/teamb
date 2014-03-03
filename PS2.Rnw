@@ -89,33 +89,28 @@ From the result of m2 and m3 in table 2, we can see income has a statistically s
 \item Suppose we were really more interested in how being a Democrat affects feelings towards Obama.  What effect does income have on this effect?  Graph your answer and insert the graph in your \LaTeX~file.\\
 
 <<label=Answer4>>=
-##Erico: I am confused here. Based on the question, which coefficient we should run a simulation for:Coef.income or Coef.nondem (or Coef.dem if we use m2)?
-
 set.seed(740)
-n.sims<-1988
-m3.sims <- sim(m3, n.sims)
-apply(m3.sims@coef, 2, mean)
+n.sims=9999
+m2.sims <- sim(m2, n.sims)
+apply(m2.sims@coef, 2, mean)
+display(m2)
 
-
-coef.no.intercept<-m3.sims@coef[,2:8]
-coef.income<-data.frame(fake_nondem=seq(min(obama$nondem),max(obama$nondem),length.out=100),coef_income=NA, ub_income=NA, lb_income=NA)
-
-for(i in 1:100){coef.income$coef_income[i]<-mean(m3.sims@coef[,])}
+coef.dem <- data.frame(fake_income = seq(min(obama$income, na.rm=T), 
+                                         max(obama$income, na.rm=T), 
+                        length.out=100), coef_dem = NA, ub_dem = NA, lb_dem = NA) 
 
 for(i in 1:100) {   
-    coef.income$coef_income[i] <- mean(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8])
-    coef.income$ub_income[i] <- quantile(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8], .975)
-    coef.income$lb_income[i] <- quantile(m3.sims@coef[,2] + coef.income$fake_nondem[i]*m3.sims@coef[,8], .025)    
-}
+    coef.dem$coef_dem[i] <- mean(m2.sims@coef[,7] + coef.dem$fake_income[i]*m2.sims@coef[,8])
+    coef.dem$ub_dem[i] <- quantile(m2.sims@coef[,7] + coef.dem$fake_income[i]*m2.sims@coef[,8], .975)
+    coef.dem$lb_dem[i] <- quantile(m2.sims@coef[,7] + coef.dem$fake_income[i]*m2.sims@coef[,8], .025)    
+} 
 
-View(coef.income)
-income.coef.plot<-ggplot(coef.income,aes(x=fake_nondem,y=coef_income))+
-        geom_line()+geom_ribbon(aes(ymin=lb_income,ymax=ub_income),alpha=.5)+ 
-                                 xlab("Democrat")+
-                                 ylab("Coefficient for Income")+
-                                 scale_x_continuous(limits=c(0,80))
-gini.coef.plot
+dem.coef.plot <- ggplot(coef.dem, aes(x = fake_income, y = coef_dem)) + 
+    geom_line() + geom_ribbon(aes(ymin=lb_dem, ymax=ub_dem), alpha=.5) +
+    xlab("Household income, $000s") + ylab("Coefficient of Democrats") +
+    scale_x_continuous(limits=c(0,80))
 
+dem.coef.plot
 
 @
 
