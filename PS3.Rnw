@@ -56,6 +56,23 @@ data.key
 install.package(MCMCpack)
 require(MCMCpack)
 
+ipak <- function(pkg){
+     new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+     if (length(new.pkg)) 
+         install.packages(new.pkg, dependencies = TRUE)
+     sapply(pkg, require, character.only = TRUE)
+ }
+
+packages <- c("ggplot2", "RCurl", "MCMCpack", "inline", "Rcpp")
+ipak(packages)
+
+m1<-MCMCregress(prefPRI~rightide+econnat+econpers+female+ses+churchatt,data=mex)
+summary(m1)
+
+
+As we can see from the section 2 of the summary, the 95% confidence interval of righttide ideology falls between 0.2025 and 0.33801 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.2701 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.2701 (section 1).
+
+
 @
 
 
