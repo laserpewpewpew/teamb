@@ -69,6 +69,10 @@ ipak(packages)
 m1<-MCMCregress(prefPRI~rightide+econnat+econpers+female+ses+churchatt,data=mex)
 summary(m1)
 
+##Erico: just checking the coefficient result if include all other variables
+m.1<-MCMCregress(prefPRI~rightide+econnat+econpers+corrupt+crime+female+ses+churchatt,data=mex)
+summary(m.1)
+
 
 As we can see from the section 2 of the summary, the 95% confidence interval of righttide ideology falls between 0.2025 and 0.33801 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.2701 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.2701 (section 1).
 
@@ -79,8 +83,15 @@ As we can see from the section 2 of the summary, the 95% confidence interval of 
 \item Suppose the literature further suggests that the effect of ideology on respondents' feelings about the PRI would be weaker among those who held more positive assessments of the national economy's recent performance.  Assess this conditional hypothesis using Empirical Bayes and the other default settings of MCMCpack.  \\
 
 <<label=Answer2>>=
+m2<-MCMCregress(prefPRI~rightide+econnat+econnat:right+econpers+female+ses+churchatt,data=mex)
+summary(m2)
 
+##Erico: just checking the coefficient result if include all other variables 
+m.2<-MCMCregress(prefPRI~rightide+econnat+econnat:right+corrupt+crime+econpers+female+ses+churchatt,data=mex)
+summary(m.2)
 
+According to m2, the effect of ideology on respondent's feeling about the PRI with every one unit positive change of the assessment of the national economy performance equals to: beta3+beta8*rightide. As we can see from the output in section 1, the influence of positive economy performance on preference to PRI is 0.664+0.01679*0.22469=0.66777. It is significant (from section 2) and larger than 0.2701. Thus the result does not support the conditional hypothesis. 
+##Erico: I am not very confident with the answer  
 
 @
 
