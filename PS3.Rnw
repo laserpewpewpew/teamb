@@ -73,7 +73,22 @@ m1<-MCMCregress(PRIfeel~rightide+econnat+female+ses+churchatt,data=mex,
     marginal.likelihood =("none") )
 summary(m1)
 
-As we can see from the section 2 of the summary, the 95% confidence interval of righttide ideology falls between 0.2370 and 0.34258 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.28961 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.28961 (section 1).
+@
+<<label=f1, echo=FALSE, results=tex, fig = TRUE, include=F>>=
+plot(m1,trace=F)
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{PS3-Figure1.pdf}
+  \end{center}
+  \caption{Density of Independent Variable}
+  \label{f:f1}
+\end{figure}
+
+
+As we can see in the section 2 of the summary, the 95% confidence interval of righttide ideology falls between 0.2370 and 0.34258 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.28961 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.28961 (section 1).
+
+
 @
 
 
@@ -138,11 +153,15 @@ mex.data <- list(N = nrow(mex), PRIfeel = mex$PRIfeel, rightide = mex$rightide,
 
 # Now we can run it
 set.seed(324)
-m1.stan <- stan(model_code = PRIfeel.code, data = mex.data, 
+m2.stan <- stan(model_code = PRIfeel.code, data = mex.data, 
                 iter = 1000, chains = 3)
 
 print(m1.stan)
-m1.stan.sim <- as.data.frame(m1.stan)
+m2.stan.sim <- as.data.frame(m2.stan)
+
+
+As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
+
 
 HDI.posterior <- function(data = NULL, mass = .95) {
     n.var <- dim(data)[2]-2
@@ -166,24 +185,124 @@ HDI.posterior <- function(data = NULL, mass = .95) {
     return(results.HDI)
 }
 
-HDI.posterior(data=m1.stan.sim)
+HDI.posterior(data=m2.stan.sim)
 @
 
 \item Assess the original, unconditional hypothesis using noninformative priors.  Include a graph of the posterior distribution for the effect of ideology on feelings toward the PRI.  Also graph the highest density intervals of the posteriors of the effects of all variables in the model, remembering to standardize the continuous variables by dividing them by twice their standard deviations. 
 
 <<label=Answer4>>=
+# First define the model for the original, unconditional hypothesis
+PRIfeel.code.1 <- '
+    data {
+        int<lower=0> N;
+        vector[N] PRIfeel;
+        vector[N] rightide;
+        vector[N] econnat;
+        vector[N] female;
+        vector[N] ses;
+        vector[N] churchatt;
+    }
+   
+    parameters {                
+        real beta1;             // coef for constant (default prior is uniform, i.e., noninformative)
+        real beta2;             
+        real beta3;
+        real beta4;
+        real beta5;
+        real beta6;
+        real beta7;
+        real<lower=0> sigma;
+    }
+    model {
+        PRIfeel ~ normal(beta1 + beta2 * rightide + beta3 * econnat +
+                             beta4 * female + beta5 * ses +
+                             beta6 * churchatt, sigma);
+    }
+'
+# Then put the data into the expected format
+mex.data <- list(N = nrow(mex), PRIfeel = mex$PRIfeel, rightide = mex$rightide,
+                   econnat = mex$econnat, female = mex$female, 
+                   ses = mex$ses, churchatt = mex$churchatt)
 
+#run it
+set.seed(740)
+m1.stan <- stan(model_code = PRIfeel.code.1, data = mex.data, 
+                iter = 1000, chains = 3)
+
+print(m1.stan)
+m1.stan.sim <- as.data.frame(m1.stan)
+
+As we can see in the output of stan model m1 (as well as Figure 2), the 95% confidence interval of righttide ideology falls between 0.2 and 0.3 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.3 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.3.
 
 @
-
-<<label=f1, echo=F, fig=T, include=F, width=6, height = 6>>=
-
-
-@
-
 
 <<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
+library(ggplot2)
+b.ideo.plot <- qplot(m1.stan.sim$beta2, geom="density") + 
+    xlab("Coefficient of Rightide Ideology") + 
+    ylab("Density of Posterior Distribution") +
+    theme_bw()
+b.rightide.plot
 
+##Erico: I cannot graph the Figure (PS3-F1). It shows: "Error in .Call.graphics(C_palette2, .Call(C_palette2, NULL)) : invalid graphics state".
+@
+
+
+<<label=f3, echo=F, fig=T, include=F, width=6, height = 6>>=
+# Graph regression results
+mex2<- mex
+
+# Standardize continuous IVs by dividing by 2 s.d.s (per Gelman (2008))
+for (iv in c(6,8,11:13)) {
+    mex2[,iv] <- mex2[,iv]/(2*sd(mex2[,iv])) 
+}
+
+mex2.data <- list(N = nrow(mex2), PRIfeel = mex2$PRIfeel, rightide = mex2$rightide,
+                     econnat = mex2$econnat, female = mex2$female, 
+                     ses = mex2$ses, churchatt = mex2$churchatt)
+
+set.seed(740)
+m1.stan2 <- stan(fit=m1.stan, data=mex2.data, iter = 1000, chains = 3)
+m1.stan2.sim <- as.data.frame(m1.stan2)
+
+# HDI.posterior is based, in part, on Kruschke (2011, 628-29)
+HDI.posterior <- function(data = NULL, mass = .95) {
+    n.var <- dim(data)[2]-2
+    results.HDI <- matrix(rep(NA,3*n.var), nrow=n.var, ncol=3)
+    for (var in 1:n.var) {
+        post <- data[,var]
+        sorted.post <- sort(post)
+        ci.idx <- floor(mass * length(sorted.post))
+        n.ci <- length(sorted.post) - ci.idx
+        ci.width <- rep(0, n.ci)
+        for (i in 1:n.ci) {
+            ci.width[i] <- sorted.post[i+ci.idx] - sorted.post[i]
+        }
+        HDI.min <- sorted.post[which.min(ci.width)]
+        HDI.max <- sorted.post[which.min(ci.width)+ci.idx]
+        mean.post <- mean(post)
+        results.HDI[var,] <- c(mean.post, HDI.min, HDI.max)
+    }  
+    results.HDI <- as.data.frame(results.HDI)
+    names(results.HDI) <- c("b", "lb", "ub")
+    return(results.HDI)
+}
+
+HDI.posterior(data=m1.stan.sim)
+
+reg.results <- HDI.posterior(m1.stan.sim)   
+reg.results <- reg.results[-1,]             # exclude constant (not interesting)
+reg.results$no <- 1:dim(reg.results)[1]     # an index to order the variables
+reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender",                     "Socioeconomic Status","Church Attendence") # variable names
+
+reg.plot <- ggplot(data = reg.results, aes(y = no, x = b)) +
+    geom_point() + geom_errorbarh(aes(xmin = lb, xmax = ub, height=0)) +
+    ylab("") + xlab("") + theme_bw() + 
+    scale_y_reverse(breaks = 1:dim(reg.results)[1], 
+                    labels = reg.results[1:dim(reg.results)[1],"var"]) +
+    geom_vline(xintercept=c(0), linetype="dotted")
+
+reg.plot
 
 @
 
