@@ -80,7 +80,7 @@ plot(m1,trace=F)
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{PS3-Figure1.pdf}
+    \includegraphics[width=\textwidth]{PS3-MCMC_m1.pdf}
   \end{center}
   \caption{Density of Independent Variable}
   \label{f:f1}
@@ -109,6 +109,7 @@ summary(m2)
 #          omit.stat=c("adj.rsq","f","ser"),
 #          label="T:res"
 #          )
+##Kellen&Erico: stargazer pack does not support making table for MCMC results
 @
 
 According to m2, the effect of postivive national economy assessment on righttide respondents'' feeling about the PRI is sum of the coefficient of econnat and the coefficient of interaction term. As we can see from the section 1 of the output, "econnat (beta3)=0.89115" and "rightide:econnat(beta7)= -0.01598", the influence of positive economy performance on preference to PRI is 0.89115+(-0.01598). Since the coefficient of rightide:econnat is negative, it means the positive assessments of the national economy weakens the effect of ideology  on feeling about the PRI. Thus the result does support the conditional hypothesis. 
@@ -160,16 +161,12 @@ set.seed(324)
 m2.stan <- stan(model_code = PRIfeel.code, data = mex.data, 
                 iter = 1000, chains = 3)
 
-print(m1.stan)
+print(m2.stan)
 m2.stan.sim <- as.data.frame(m2.stan)
-@
 
-As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
-
-<<label=Answer3.b, echo=FALSE, results=tex>>=
 HDI.posterior <- function(data = NULL, mass = .95) {
     n.var <- dim(data)[2]-2
-    results.HDI <- matrix(rep(NA,3*n.vars), nrow=n.vars, ncol=3)
+    results.HDI <- matrix(rep(NA,3*n.var), nrow=n.var, ncol=3)
     for (var in 1:n.var) {
         post <- data[,var]
         sorted.post <- sort(post)
@@ -191,6 +188,8 @@ HDI.posterior <- function(data = NULL, mass = .95) {
 
 HDI.posterior(data=m2.stan.sim)
 @
+As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
+
 
 \item Assess the original, unconditional hypothesis using noninformative priors.  Include a graph of the posterior distribution for the effect of ideology on feelings toward the PRI.  Also graph the highest density intervals of the posteriors of the effects of all variables in the model, remembering to standardize the continuous variables by dividing them by twice their standard deviations. 
 
@@ -239,19 +238,17 @@ m1.stan.sim <- as.data.frame(m1.stan)
 
 As we can see in the output of stan model m1 (as well as Figure 2), the 95\% confidence interval of righttide ideology falls between 0.2 and 0.3 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.3 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.3.
 
-<<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
+<<label=f1, echo=F, fig=T, include=F, width=6, height = 6>>=
 library(ggplot2)
-b.ideo.plot <- qplot(m1.stan.sim$beta2, geom="density") + 
+b.rightide.plot <- qplot(m1.stan.sim$beta2, geom="density") + 
     xlab("Coefficient of Rightide Ideology") + 
     ylab("Density of Posterior Distribution") +
     theme_bw()
 b.rightide.plot
-
-##Erico: I cannot graph the Figure (PS3-F1). It shows: "Error in .Call.graphics(C_palette2, .Call(C_palette2, NULL)) : invalid graphics state".
 @
 
 
-<<label=f3, echo=F, fig=T, include=F, width=6, height = 6>>=
+<<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
 # Graph regression results
 mex2<- mex
 
@@ -268,7 +265,7 @@ set.seed(740)
 m1.stan2 <- stan(fit=m1.stan, data=mex2.data, iter = 1000, chains = 3)
 m1.stan2.sim <- as.data.frame(m1.stan2)
 
-# HDI.posterior is based, in part, on Kruschke (2011, 628-29)
+
 HDI.posterior <- function(data = NULL, mass = .95) {
     n.var <- dim(data)[2]-2
     results.HDI <- matrix(rep(NA,3*n.var), nrow=n.var, ncol=3)
@@ -296,7 +293,7 @@ HDI.posterior(data=m1.stan.sim)
 reg.results <- HDI.posterior(m1.stan.sim)   
 reg.results <- reg.results[-1,]             # exclude constant (not interesting)
 reg.results$no <- 1:dim(reg.results)[1]     # an index to order the variables
-reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender",                     "Socioeconomic Status","Church Attendence") # variable names
+reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender",                     "Socioeconomic Status","Church Attendence","") # variable names
 
 reg.plot <- ggplot(data = reg.results, aes(y = no, x = b)) +
     geom_point() + 
