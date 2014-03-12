@@ -1,0 +1,260 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+
+\usepackage{graphicx}    	% Enable graphics commands
+\usepackage{lscape}		% Enable landscape with \begin{landscape} until \end{landscape}
+\usepackage{natbib}			% Enable citation commands \citep{}, \citet{}, etc.
+\bibpunct{(}{)}{;}{a}{}{,}		% Formatting for in-text citations
+\usepackage{setspace}		% Enable double-spacing with \begin{spacing}{2} until \end{spacing}.
+\usepackage[utf8]{inputenc} 	% Enable utf8 characters, i.e., accents without coding--just type them in.
+\usepackage[english]{babel}	% English hyphenation and alphabetization.  Other languages available.
+\usepackage{dcolumn}        % For decimal-aligned stargazer output.
+\usepackage[colorlinks=true, urlcolor=blue, citecolor=black, linkcolor=black]{hyperref} % Include hyperlinks with the \url and \href commands.
+\setlength{\tabcolsep}{1pt}	% Make tables slightly narrower by reducing space between columns.
+
+\renewcommand\floatpagefraction{.9}	% These commands allow larger tables and graphics to fit
+\renewcommand\topfraction{.9}		% on a page when default settings would complain.
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+
+\newcommand{\R}{\textsf{R}~}        %This creates the command \R to typeset the name R correctly.
+
+%\usepackage[left=1in, right=1in]{geometry}	%Turn footnotes into endnotes (commented out).
+%\renewcommand{\footnotesize}{\normalsize}	
+%\usepackage{endnotes}
+%\renewcommand{\footnote}{\endnote}
+%\renewcommand{\section}{\subsection}
+
+\usepackage{Sweave}
+\begin{document}
+\input{PS3-concordance}
+
+\pagestyle{empty}
+
+\begin{center}
+{\Large \textbf{POLI 5003: Problem Set \# 1, Team A}}
+\end{center}
+
+The \emph{Partido Revolucionario Institucional} (PRI) maintained authoritarian rule over Mexico for more than seventy years, from the end of the Mexican Revolution until after the July 2000 elections.  The dataset accompanying this assignment (\texttt{mex2000.dta}) is drawn from a survey conducted during that electoral campaign.  You will use it to examine the predictors of Mexicans' attitudes towards the PRI and its opponents at that critical time in the country's history. 
+
+\begin{Schunk}
+\begin{Sinput}
+> # Setup
+> require(foreign)
+> mex <- read.dta("mex2000.dta")
+> var.labels <- attr(mex,"var.labels")
+> data.key <- data.frame(var.name=names(mex),var.labels)
+> data.key
+\end{Sinput}
+\begin{Soutput}
+    var.name
+1    PRIfeel
+2    PANfeel
+3    PRDfeel
+4    prefPRI
+5    prefPAN
+6   rightide
+7   econpers
+8    econnat
+9    corrupt
+10     crime
+11    female
+12       ses
+13 churchatt
+                                                                         var.labels
+1                          What is your opinion of the PRI? 0=very bad 10=very good
+2                          What is your opinion of the PAN? 0=very bad 10=very good
+3                          What is your opinion of the PRD? 0=very bad 10=very good
+4                 PRIfeel - feeling toward best-liked opposition party (PAN or PRD)
+5                                                                 PANfeel - PRIfeel
+6                                    Political ideology, 0=very left, 10=very right
+7  Change in personal economic situation, 1 yr. 1=much worse now, 5=much better now
+8  View of national economic sit. over past yr. 1=much worse now, 5=much better now
+9               View of gov't corruption, past yr. 1=much less now, 5=much more now
+10                   View of crime over past year, 1=much less now, 5=much more now
+11                                                              Female? 0=no, 1=yes
+12                                    Socioeconomic status, 1=very low, 6=very high
+13    Church attendance: 1=never, 2=occationally, 3=monthly, 4=weekly, 5=more often
+\end{Soutput}
+\end{Schunk}
+
+\begin{enumerate}
+
+\item During its long rule, the PRI worked to present itself as the party of all Mexicans and was therefore something of an ideological chameleon.  Nevertheless, we might hypothesize that people who leaned more to the right would hold more favorable views of this authoritarian party (Americanists may recall V.O. Key's writings about the one-party South), and suppose we want to control for their assessments of the recent performance of the national economy as well as of their personal characteristics.  Is this ideology hypothesis supported by a regression of \texttt{PRIfeel} using Empirical Bayes and the other default settings of MCMCpack?  How do you know?  Describe the estimated effect of ideology on attitudes toward the PRI.  \\
+
+\begin{Schunk}
+\begin{Sinput}
+> require(MCMCpack)
+> ipak <- function(pkg){
++      new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
++      if (length(new.pkg)) 
++          install.packages(new.pkg, dependencies = TRUE)
++      sapply(pkg, require, character.only = TRUE)
++  }
+> packages <- c("ggplot2", "RCurl", "MCMCpack", "inline", "Rcpp")
+> ipak(packages)
+\end{Sinput}
+\begin{Soutput}
+ ggplot2    RCurl MCMCpack   inline     Rcpp 
+    TRUE     TRUE     TRUE     TRUE     TRUE 
+\end{Soutput}
+\begin{Sinput}
+> m1<-MCMCregress(PRIfeel~rightide+econnat+female+ses+churchatt,data=mex,
++     burnin = 1000, mcmc = 10000,
++     thin = 1, verbose = 0, seed = 19880201, beta.start = NA, 
++     b0 = 0, B0 = 0, c0 = 0.001, d0 = 0.001, sigma.mu = NA, sigma.var = NA, 
++     marginal.likelihood =("none") )
+> summary(m1)
+\end{Sinput}
+\begin{Soutput}
+Iterations = 1001:11000
+Thinning interval = 1 
+Number of chains = 1 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+                Mean      SD  Naive SE Time-series SE
+(Intercept)  1.67865 0.40282 0.0040282      0.0040282
+rightide     0.28961 0.02682 0.0002682      0.0002678
+econnat      0.79225 0.09087 0.0009087      0.0009087
+female       0.53840 0.16174 0.0016174      0.0016174
+ses         -0.23964 0.07272 0.0007272      0.0007095
+churchatt    0.03758 0.07191 0.0007191      0.0007191
+sigma2      10.38477 0.37170 0.0037170      0.0036131
+
+2. Quantiles for each variable:
+
+               2.5%      25%      50%      75%    97.5%
+(Intercept)  0.8814  1.40950  1.67825  1.94583  2.46143
+rightide     0.2370  0.27159  0.28963  0.30782  0.34258
+econnat      0.6148  0.73190  0.79161  0.85248  0.97128
+female       0.2197  0.43032  0.53729  0.64594  0.86219
+ses         -0.3817 -0.28873 -0.24061 -0.19132 -0.09585
+churchatt   -0.1027 -0.01148  0.03721  0.08571  0.17929
+sigma2       9.6841 10.12877 10.37587 10.63067 11.12679
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{PS3-Figure1.pdf}
+  \end{center}
+  \caption{Density of Independent Variable}
+  \label{f:f1}
+\end{figure}
+
+As we can see in the section 2 of the summary, the 95\% confidence interval of righttide ideology falls between 0.2370 and 0.34258 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.28961 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.28961 (section 1).
+
+
+
+\item Suppose the literature further suggests that the effect of ideology on respondents' feelings about the PRI would be weaker among those who held more positive assessments of the national economy's recent performance.  Assess this conditional hypothesis using Empirical Bayes and the other default settings of MCMCpack.  \\
+
+\begin{Schunk}
+\begin{Sinput}
+> m2<-MCMCregress(PRIfeel~rightide+econnat+rightide:econnat+female+ses+churchatt,data=mex,burnin = 1000, mcmc = 10000,
++     thin = 1, verbose = 0, seed = 19880201, beta.start = NA, 
++     b0 = 0, B0 = 0, c0 = 0.001, d0 = 0.001, sigma.mu = NA, sigma.var = NA, 
++     marginal.likelihood =("none") )
+> summary(m2)
+\end{Sinput}
+\begin{Soutput}
+Iterations = 1001:11000
+Thinning interval = 1 
+Number of chains = 1 
+Sample size per chain = 10000 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+                     Mean      SD  Naive SE Time-series SE
+(Intercept)       1.41214 0.62440 0.0062440      0.0062440
+rightide          0.33330 0.08212 0.0008212      0.0008076
+econnat           0.89115 0.20099 0.0020099      0.0020099
+female            0.53641 0.16154 0.0016154      0.0015916
+ses              -0.23862 0.07374 0.0007374      0.0007374
+churchatt         0.03804 0.07145 0.0007145      0.0007279
+rightide:econnat -0.01598 0.02851 0.0002851      0.0002851
+sigma2           10.39155 0.36606 0.0036606      0.0035053
+
+2. Quantiles for each variable:
+
+                     2.5%       25%      50%       75%    97.5%
+(Intercept)       0.17666  0.988293  1.41492  1.832663  2.63241
+rightide          0.16944  0.278760  0.33312  0.389432  0.49443
+econnat           0.49626  0.755669  0.89095  1.028299  1.28377
+female            0.21728  0.427948  0.53707  0.645899  0.85682
+ses              -0.38200 -0.288061 -0.23851 -0.189034 -0.09362
+churchatt        -0.10125 -0.009644  0.03751  0.086170  0.17828
+rightide:econnat -0.07107 -0.035582 -0.01618  0.003339  0.04018
+sigma2            9.69708 10.137559 10.37946 10.629708 11.13262
+\end{Soutput}
+\end{Schunk}
+
+\begin{Schunk}
+\begin{Sinput}
+> # library(stargazer)
+> # stargazer(m1,m2,title="MCMC regression Results",
+> #          dep.var.labels="Feeling about the PRI",
+> #          covariate.labels=c("Ideology", "National Economy", "Female", "SES", "Church Attend."),
+> #          align=TRUE, 
+> #          omit.stat=c("adj.rsq","f","ser"),
+> #          label="T:res"
+> #          )
+\end{Sinput}
+\end{Schunk}
+
+According to m2, the effect of postivive national economy assessment on righttide respondents'' feeling about the PRI is sum of the coefficient of econnat and the coefficient of interaction term. As we can see from the section 1 of the output, "econnat (beta3)=0.89115" and "rightide:econnat(beta7)= -0.01598", the influence of positive economy performance on preference to PRI is 0.89115+(-0.01598). Since the coefficient of rightide:econnat is negative, it means the positive assessments of the national economy weakens the effect of ideology  on feeling about the PRI. Thus the result does support the conditional hypothesis. 
+
+\item Suppose a ``helpful'' reviewer points out that Empirical Bayes imposes a very strong set of priors, and that noninformative priors may yield a different result.  Going well beyond the call of duty, this reviewer even offers some code for you to study and then try out.  Is the reviewer correct that your conclusions regarding the conditional hypothesis change with a different prior?  \\
+
+\begin{Schunk}
+\begin{Sinput}
+> require(rstan)
+> # First we have to define the model
+> PRIfeel.code <- '
++     data {
++         int<lower=0> N;
++         vector[N] PRIfeel;
++         vector[N] rightide;
++         vector[N] econnat;
++         vector[N] female;
++         vector[N] ses;
++         vector[N] churchatt;
++     }
++     transformed data {
++         vector[N] rightideXeconnat;
++         rightideXeconnat <- rightide .* econnat;
++     }
++     parameters {                
++         real beta1;             // coef for constant (default prior is uniform, i.e., noninformative)
++         real beta2;             
++         real beta3;
++         real beta4;
++         real beta5;
++         real beta6;
++         real beta7;
++         real<lower=0> sigma;
++     }
++     model {
++         PRIfeel ~ normal(beta1 + beta2 * rightide + beta3 * econnat +
++                              beta4 * female + beta5 * ses +
++                              beta6 * churchatt + beta7 * rightideXeconnat, sigma);
++     }
++ '
+> # Then put the data into the expected format
+> mex.data <- list(N = nrow(mex), PRIfeel = mex$PRIfeel, rightide = mex$rightide,
++                    econnat = mex$econnat, female = mex$female, 
++                    ses = mex$ses, churchatt = mex$churchatt)
+> # Now we can run it
+> set.seed(324)
+> m2.stan <- stan(model_code = PRIfeel.code, data = mex.data, 
++                 iter = 1000, chains = 3)

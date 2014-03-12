@@ -167,7 +167,7 @@ F-statistic: 135.5 on 7 and 1850 DF,  p-value: < 2.2e-16
 > stargazer(m1,m2,m3,title="Linear regression Results",dep.var.labels="Attitude towards Barack Obama", align=TRUE, omit.stat=c("adj.rsq","f","ser"),label="T:res")
 \end{Sinput}
 % Table created by stargazer v.4.5.3 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
-% Date and time: Mon, Mar 03, 2014 - 10:56:57 AM
+% Date and time: Thu, Mar 06, 2014 - 11:32:42 AM
 % Requires LaTeX packages: dcolumn 
 \begin{table}[!htbp] \centering 
   \caption{Linear regression Results} 
@@ -244,26 +244,6 @@ Using this coding scheme for partisanship we see our results from Question 2 ver
 [6]  -0.005178129   4.442292229  17.076609333   0.068027834
 \end{Soutput}
 \begin{Sinput}
-> display(m2)
-\end{Sinput}
-\begin{Soutput}
-lm(formula = obama ~ income + dem + dem:income + rep + age + 
-    educ + female + black, data = obama)
-            coef.est coef.se
-(Intercept)  61.67     3.27 
-income       -0.05     0.01 
-dem          10.50     1.53 
-rep         -16.01     1.42 
-age          -0.03     0.03 
-educ          0.00     0.21 
-female        4.43     0.99 
-black        17.07     1.23 
-income:dem    0.07     0.02 
----
-n = 1858, k = 9
-residual sd = 20.97, R-Squared = 0.38
-\end{Soutput}
-\begin{Sinput}
 > coef.dem <- data.frame(fake_income = seq(min(obama$income, na.rm=T), 
 +                                          max(obama$income, na.rm=T), 
 +                         length.out=100), coef_dem = NA, ub_dem = NA, lb_dem = NA) 
@@ -275,7 +255,7 @@ residual sd = 20.97, R-Squared = 0.38
 > dem.coef.plot <- ggplot(coef.dem, aes(x = fake_income, y = coef_dem)) + 
 +     geom_line() + geom_ribbon(aes(ymin=lb_dem, ymax=ub_dem), alpha=.5) +
 +     xlab("Household income, $000s") + ylab("Coefficient of Democrats") +
-+     scale_x_continuous(limits=c(0,80)) + 
++     scale_x_continuous(limits=c(0,250)) + 
 +     scale_y_continuous(limits=c(0,2000))
 > dem.coef.plot
 \end{Sinput}

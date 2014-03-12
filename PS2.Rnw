@@ -77,7 +77,6 @@ set.seed(740)
 n.sims=9999
 m2.sims <- sim(m2, n.sims)
 apply(m2.sims@coef, 2, mean)
-display(m2)
 
 coef.dem <- data.frame(fake_income = seq(min(obama$income, na.rm=T), 
                                          max(obama$income, na.rm=T), 
@@ -92,7 +91,7 @@ for(i in 1:100) {
 dem.coef.plot <- ggplot(coef.dem, aes(x = fake_income, y = coef_dem)) + 
     geom_line() + geom_ribbon(aes(ymin=lb_dem, ymax=ub_dem), alpha=.5) +
     xlab("Household income, $000s") + ylab("Coefficient of Democrats") +
-    scale_x_continuous(limits=c(0,80)) + 
+    scale_x_continuous(limits=c(0,250)) + 
     scale_y_continuous(limits=c(0,2000))
 
 dem.coef.plot

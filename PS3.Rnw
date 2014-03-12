@@ -53,7 +53,6 @@ data.key
 \item During its long rule, the PRI worked to present itself as the party of all Mexicans and was therefore something of an ideological chameleon.  Nevertheless, we might hypothesize that people who leaned more to the right would hold more favorable views of this authoritarian party (Americanists may recall V.O. Key's writings about the one-party South), and suppose we want to control for their assessments of the recent performance of the national economy as well as of their personal characteristics.  Is this ideology hypothesis supported by a regression of \texttt{PRIfeel} using Empirical Bayes and the other default settings of MCMCpack?  How do you know?  Describe the estimated effect of ideology on attitudes toward the PRI.  \\
 
 <<label=Answer1>>=
-install.package(MCMCpack)
 require(MCMCpack)
 
 ipak <- function(pkg){
@@ -74,8 +73,10 @@ m1<-MCMCregress(PRIfeel~rightide+econnat+female+ses+churchatt,data=mex,
 summary(m1)
 
 @
+
 <<label=f1, echo=FALSE, results=tex, fig = TRUE, include=F>>=
 plot(m1,trace=F)
+@
 
 \begin{figure}[htbp]
   \begin{center}
@@ -85,11 +86,8 @@ plot(m1,trace=F)
   \label{f:f1}
 \end{figure}
 
+As we can see in the section 2 of the summary, the 95\% confidence interval of righttide ideology falls between 0.2370 and 0.34258 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.28961 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.28961 (section 1).
 
-As we can see in the section 2 of the summary, the 95% confidence interval of righttide ideology falls between 0.2370 and 0.34258 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.28961 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.28961 (section 1).
-
-
-@
 
 
 \item Suppose the literature further suggests that the effect of ideology on respondents' feelings about the PRI would be weaker among those who held more positive assessments of the national economy's recent performance.  Assess this conditional hypothesis using Empirical Bayes and the other default settings of MCMCpack.  \\
@@ -100,14 +98,20 @@ m2<-MCMCregress(PRIfeel~rightide+econnat+rightide:econnat+female+ses+churchatt,d
     b0 = 0, B0 = 0, c0 = 0.001, d0 = 0.001, sigma.mu = NA, sigma.var = NA, 
     marginal.likelihood =("none") )
 summary(m2)
-
-According to m2, the effect of postivive national economy assessment on righttide respondents'' feeling about the PRI is sum of the coefficient of econnat and the coefficient of interaction term. As we can see from the section 1 of the output, "econnat (beta3)=0.89115" and "rightide:econnat(beta7)= -0.01598", the influence of positive economy performance on preference to PRI is 0.89115+(-0.01598). Since the coefficient of rightide:econnat is negative, it means the positive assessments of the national economy weakens the effect of ideology  on feeling about the PRI. Thus the result does support the conditional hypothesis. 
-
-library(stargazer)
-stargazer(m1,m2,title="MCMC regression Results",dep.var.labels="Feeling about the PRI", align=TRUE, omit.stat=c("adj.rsq","f","ser"),label="T:res")
-
 @
 
+<<label=Table 1, results=tex, echo=TRUE>>=
+# library(stargazer)
+# stargazer(m1,m2,title="MCMC regression Results",
+#          dep.var.labels="Feeling about the PRI",
+#          covariate.labels=c("Ideology", "National Economy", "Female", "SES", "Church Attend."),
+#          align=TRUE, 
+#          omit.stat=c("adj.rsq","f","ser"),
+#          label="T:res"
+#          )
+@
+
+According to m2, the effect of postivive national economy assessment on righttide respondents'' feeling about the PRI is sum of the coefficient of econnat and the coefficient of interaction term. As we can see from the section 1 of the output, "econnat (beta3)=0.89115" and "rightide:econnat(beta7)= -0.01598", the influence of positive economy performance on preference to PRI is 0.89115+(-0.01598). Since the coefficient of rightide:econnat is negative, it means the positive assessments of the national economy weakens the effect of ideology  on feeling about the PRI. Thus the result does support the conditional hypothesis. 
 
 \item Suppose a ``helpful'' reviewer points out that Empirical Bayes imposes a very strong set of priors, and that noninformative priors may yield a different result.  Going well beyond the call of duty, this reviewer even offers some code for you to study and then try out.  Is the reviewer correct that your conclusions regarding the conditional hypothesis change with a different prior?  \\
 
@@ -158,11 +162,11 @@ m2.stan <- stan(model_code = PRIfeel.code, data = mex.data,
 
 print(m1.stan)
 m2.stan.sim <- as.data.frame(m2.stan)
-
+@
 
 As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
 
-
+<<label=Answer3.b, echo=FALSE, results=tex>>=
 HDI.posterior <- function(data = NULL, mass = .95) {
     n.var <- dim(data)[2]-2
     results.HDI <- matrix(rep(NA,3*n.vars), nrow=n.vars, ncol=3)
@@ -231,10 +235,9 @@ m1.stan <- stan(model_code = PRIfeel.code.1, data = mex.data,
 
 print(m1.stan)
 m1.stan.sim <- as.data.frame(m1.stan)
-
-As we can see in the output of stan model m1 (as well as Figure 2), the 95% confidence interval of righttide ideology falls between 0.2 and 0.3 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.3 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.3.
-
 @
+
+As we can see in the output of stan model m1 (as well as Figure 2), the 95\% confidence interval of righttide ideology falls between 0.2 and 0.3 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.3 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.3.
 
 <<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
 library(ggplot2)
@@ -296,14 +299,14 @@ reg.results$no <- 1:dim(reg.results)[1]     # an index to order the variables
 reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender",                     "Socioeconomic Status","Church Attendence") # variable names
 
 reg.plot <- ggplot(data = reg.results, aes(y = no, x = b)) +
-    geom_point() + geom_errorbarh(aes(xmin = lb, xmax = ub, height=0)) +
+    geom_point() + 
+  geom_errorbarh(aes(xmin = lb, xmax = ub, height=0)) +
     ylab("") + xlab("") + theme_bw() + 
     scale_y_reverse(breaks = 1:dim(reg.results)[1], 
                     labels = reg.results[1:dim(reg.results)[1],"var"]) +
     geom_vline(xintercept=c(0), linetype="dotted")
 
 reg.plot
-
 @
 
 \begin{figure}[htbp] 
