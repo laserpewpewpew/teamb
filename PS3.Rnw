@@ -250,12 +250,7 @@ b.rightide.plot
 
 <<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
 # Graph regression results
-mex2<- mex
-
-# Standardize continuous IVs by dividing by 2 s.d.s (per Gelman (2008))
-for (iv in c(6,8,11:13)) {
-    mex2[,iv] <- mex2[,iv]/(2*sd(mex2[,iv])) 
-}
+mex2<mex
 
 mex2.data <- list(N = nrow(mex2), PRIfeel = mex2$PRIfeel, rightide = mex2$rightide,
                      econnat = mex2$econnat, female = mex2$female, 
