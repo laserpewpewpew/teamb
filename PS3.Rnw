@@ -250,16 +250,7 @@ b.rightide.plot
 
 <<label=f2, echo=F, fig=T, include=F, width=6, height = 6>>=
 # Graph regression results
-mex2<mex
-
-mex2.data <- list(N = nrow(mex2), PRIfeel = mex2$PRIfeel, rightide = mex2$rightide,
-                     econnat = mex2$econnat, female = mex2$female, 
-                     ses = mex2$ses, churchatt = mex2$churchatt)
-
-set.seed(740)
-m1.stan2 <- stan(fit=m1.stan, data=mex2.data, iter = 1000, chains = 3)
-m1.stan2.sim <- as.data.frame(m1.stan2)
-
+# Because all the variables are not continuous, it is not necessary to standardlize them. 
 
 HDI.posterior <- function(data = NULL, mass = .95) {
     n.var <- dim(data)[2]-2
@@ -288,7 +279,7 @@ HDI.posterior(data=m1.stan.sim)
 reg.results <- HDI.posterior(m1.stan.sim)   
 reg.results <- reg.results[-1,]             # exclude constant (not interesting)
 reg.results$no <- 1:dim(reg.results)[1]     # an index to order the variables
-reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender",                     "Socioeconomic Status","Church Attendence","") # variable names
+reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender","Socioeconomic Status","Church Attendence","") # variable names
 
 reg.plot <- ggplot(data = reg.results, aes(y = no, x = b)) +
     geom_point() + 
