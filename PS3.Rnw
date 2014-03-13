@@ -80,7 +80,7 @@ plot(m1,trace=F)
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{PS3-MCMC_m1.pdf}
+    \includegraphics[width=\textwidth]{PS3-f1.pdf}
   \end{center}
   \caption{Density of Independent Variable}
   \label{f:f1}
@@ -216,7 +216,6 @@ PRIfeel.code.1 <- '
         real beta4;
         real beta5;
         real beta6;
-        real beta7;
         real<lower=0> sigma;
     }
     model {
@@ -290,9 +289,9 @@ reg.results <- HDI.posterior(m1.stan.sim)
 reg.results <- reg.results[-1,]             # exclude constant (not interesting)
 reg.results$no <- 1:dim(reg.results)[1]     # an index to order the variables
 <<<<<<< HEAD
-reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender","Socioeconomic Status","Church Attendence", "") # variable names
+reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender","Socioeconomic Status","Church Attendence") # variable names
 =======
-reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender","Socioeconomic Status","Church Attendence","") # variable names
+reg.results$var <- c("Rightide Ideology","Assessment of National Eco","Gender","Socioeconomic Status","Church Attendence") # variable names
 >>>>>>> 7aa62a21968e215f5350ff120fc5a09736db651c
 
 reg.plot <- ggplot(data = reg.results, aes(y = no, x = b)) +
@@ -310,7 +309,7 @@ reg.plot
   \caption{Posterior Distribution of the Effect of Ideology}
   \label{F:postide}
   \begin{center}
-    \includegraphics[width=5.25in]{PS3-f1.pdf}
+    \includegraphics[width=5.25in]{PS3-f2.pdf}
   \end{center}
 \end{figure}
 
@@ -318,7 +317,7 @@ reg.plot
   \caption{Posterior Distribution of the Effect of Ideology}
   \label{F:postide}
   \begin{center}
-    \includegraphics[width=5.25in]{PS3-f2.pdf}
+    \includegraphics[width=5.25in]{PS3-f3.pdf}
   \end{center}
   \begin{footnotesize}
   \begin{tabular}{p{.4in} p{4.75in}}

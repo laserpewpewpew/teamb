@@ -106,7 +106,6 @@ The \emph{Partido Revolucionario Institucional} (PRI) maintained authoritarian r
 +     burnin = 1000, mcmc = 10000,
 +     thin = 1, verbose = 0, seed = 19880201, beta.start = NA, 
 +     b0 = 0, B0 = 0, c0 = 0.001, d0 = 0.001, sigma.mu = NA, sigma.var = NA, 
-<<<<<<< HEAD
 +     marginal.likelihood =("none") )
 > summary(m1)
 \end{Sinput}
@@ -147,7 +146,7 @@ sigma2       9.6841 10.12877 10.37587 10.63067 11.12679
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{PS3-Figure1.pdf}
+    \includegraphics[width=\textwidth]{PS3-f1.pdf}
   \end{center}
   \caption{Density of Independent Variable}
   \label{f:f1}
@@ -210,6 +209,7 @@ sigma2            9.69708 10.137559 10.37946 10.629708 11.13262
 > #          omit.stat=c("adj.rsq","f","ser"),
 > #          label="T:res"
 > #          )
+> ##Kellen&Erico: stargazer pack does not support making table for MCMC results
 \end{Sinput}
 \end{Schunk}
 
@@ -269,8 +269,8 @@ cygwin warning:
   CYGWIN environment variable option "nodosfilewarning" turns off this warning.
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
-C:/Users/kellengracey/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/var_stack.hpp:49:17: warning: 'void stan::agrad::free_memory()' defined but not used [-Wunused-function]
-C:/Users/kellengracey/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/chainable.hpp:87:17: warning: 'void stan::agrad::set_zero_all_adjoints()' defined but not used [-Wunused-function]
+C:/Users/Dong/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/var_stack.hpp:49:17: warning: 'void stan::agrad::free_memory()' defined but not used [-Wunused-function]
+C:/Users/Dong/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/chainable.hpp:87:17: warning: 'void stan::agrad::set_zero_all_adjoints()' defined but not used [-Wunused-function]
 SAMPLING FOR MODEL 'PRIfeel.code' NOW (CHAIN 1).
 
 Iteration:   1 / 1000 [  0%]  (Warmup)
@@ -284,9 +284,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 19.033 seconds (Warm-up)
-              15.515 seconds (Sampling)
-              34.548 seconds (Total)
+Elapsed Time: 23.281 seconds (Warm-up)
+              20.468 seconds (Sampling)
+              43.749 seconds (Total)
 
 SAMPLING FOR MODEL 'PRIfeel.code' NOW (CHAIN 2).
 
@@ -301,9 +301,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 16.467 seconds (Warm-up)
-              13.32 seconds (Sampling)
-              29.787 seconds (Total)
+Elapsed Time: 30.053 seconds (Warm-up)
+              17.654 seconds (Sampling)
+              47.707 seconds (Total)
 
 SAMPLING FOR MODEL 'PRIfeel.code' NOW (CHAIN 3).
 
@@ -318,9 +318,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 18.818 seconds (Warm-up)
-              13.382 seconds (Sampling)
-              32.2 seconds (Total)
+Elapsed Time: 23.252 seconds (Warm-up)
+              16.845 seconds (Sampling)
+              40.097 seconds (Total)
 \end{Soutput}
 \begin{Sinput}
 > print(m2.stan)
@@ -341,21 +341,37 @@ beta7     0.0     0.0 0.0    -0.1     0.0     0.0     0.0     0.0   523    1
 sigma     3.2     0.0 0.1     3.1     3.2     3.2     3.3     3.3  1155    1
 lp__  -2713.0     0.1 2.0 -2717.6 -2714.1 -2712.7 -2711.6 -2710.2   562    1
 
-Samples were drawn using NUTS(diag_e) at Thu Mar 13 10:03:10 2014.
+Samples were drawn using NUTS(diag_e) at Thu Mar 13 11:45:17 2014.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
 \end{Soutput}
 \begin{Sinput}
 > m2.stan.sim <- as.data.frame(m2.stan)
-> 
-> 
-> 
+> HDI.posterior <- function(data = NULL, mass = .95) {
++     n.var <- dim(data)[2]-2
++     results.HDI <- matrix(rep(NA,3*n.var), nrow=n.var, ncol=3)
++     for (var in 1:n.var) {
++         post <- data[,var]
++         sorted.post <- sort(post)
++         ci.idx <- floor(mass * length(sorted.post))
++         n.ci <- length(sorted.post) - ci.idx
++         ci.width <- rep(0, n.ci)
++         for (i in 1:n.ci) {
++             ci.width[i] <- sorted.post[i+ci.idx] - sorted.post[i]
++         }
++         HDI.min <- sorted.post[which.min(ci.width)]
++         HDI.max <- sorted.post[which.min(ci.width)+ci.idx]
++         mean.post <- mean(post)
++         results.HDI[var,] <- c(mean.post, HDI.min, HDI.max)
++     }  
++     results.HDI <- as.data.frame(results.HDI)
++     names(results.HDI) <- c("b", "lb", "ub")
++     return(results.HDI)
++ }
+> HDI.posterior(data=m2.stan.sim)
 \end{Sinput}
-\end{Schunk}
-
-As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
-
+\begin{Soutput}
             b          lb          ub
 1  1.45680481  0.20047082  2.65509789
 2  0.32983824  0.16562228  0.49026322
@@ -364,6 +380,16 @@ As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC 
 5 -0.24496189 -0.38062972 -0.10160730
 6  0.04090839 -0.09469561  0.19153111
 7 -0.01489438 -0.07351261  0.04247551
+\end{Soutput}
+\begin{Sinput}
+> 
+\end{Sinput}
+\end{Schunk}
+As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
+
+
+As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC econnat:0.891), beta4=0.5 (MCMC female=0.536), beta5=-0.2 (MCMC ses=-0.239),beta6=0.0 (MCMC churchatt=0.038), beta7=0.0 (MCMC rightide:econnat=-0.016), the stan result with weak priors (uniform distribution) do not yield a very different result.
+
 \item Assess the original, unconditional hypothesis using noninformative priors.  Include a graph of the posterior distribution for the effect of ideology on feelings toward the PRI.  Also graph the highest density intervals of the posteriors of the effects of all variables in the model, remembering to standardize the continuous variables by dividing them by twice their standard deviations. 
 
 \begin{Schunk}
@@ -387,7 +413,6 @@ As we can see from the output, beta2=0.3 (MCMC rightide:0.333), beta3=0.9 (MCMC 
 +         real beta4;
 +         real beta5;
 +         real beta6;
-+         real beta7;
 +         real<lower=0> sigma;
 +     }
 +     model {
@@ -414,8 +439,8 @@ cygwin warning:
   CYGWIN environment variable option "nodosfilewarning" turns off this warning.
   Consult the user's guide for more details about POSIX paths:
     http://cygwin.com/cygwin-ug-net/using.html#using-pathnames
-C:/Users/kellengracey/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/var_stack.hpp:49:17: warning: 'void stan::agrad::free_memory()' defined but not used [-Wunused-function]
-C:/Users/kellengracey/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/chainable.hpp:87:17: warning: 'void stan::agrad::set_zero_all_adjoints()' defined but not used [-Wunused-function]
+C:/Users/Dong/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/var_stack.hpp:49:17: warning: 'void stan::agrad::free_memory()' defined but not used [-Wunused-function]
+C:/Users/Dong/Documents/R/win-library/3.0/rstan/include//stansrc/stan/agrad/rev/chainable.hpp:87:17: warning: 'void stan::agrad::set_zero_all_adjoints()' defined but not used [-Wunused-function]
 SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 1).
 
 Iteration:   1 / 1000 [  0%]  (Warmup)
@@ -429,9 +454,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 65.718 seconds (Warm-up)
-              56.289 seconds (Sampling)
-              122.007 seconds (Total)
+Elapsed Time: 14.785 seconds (Warm-up)
+              9.346 seconds (Sampling)
+              24.131 seconds (Total)
 
 SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 2).
 
@@ -446,9 +471,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 60.727 seconds (Warm-up)
-              51.198 seconds (Sampling)
-              111.925 seconds (Total)
+Elapsed Time: 10.575 seconds (Warm-up)
+              8.813 seconds (Sampling)
+              19.388 seconds (Total)
 
 SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 3).
 
@@ -463,9 +488,9 @@ Iteration: 700 / 1000 [ 70%]  (Sampling)
 Iteration: 800 / 1000 [ 80%]  (Sampling)
 Iteration: 900 / 1000 [ 90%]  (Sampling)
 Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 51.59 seconds (Warm-up)
-              64.353 seconds (Sampling)
-              115.943 seconds (Total)
+Elapsed Time: 10.844 seconds (Warm-up)
+              11.845 seconds (Sampling)
+              22.689 seconds (Total)
 \end{Soutput}
 \begin{Sinput}
 > print(m1.stan)
@@ -475,28 +500,17 @@ Inference for Stan model: PRIfeel.code.1.
 3 chains, each with iter=1000; warmup=500; thin=1; 
 post-warmup draws per chain=500, total post-warmup draws=1500.
 
-               mean      se_mean           sd          2.5%           25%
-beta1  1.700000e+00 0.000000e+00 4.000000e-01  9.000000e-01  1.400000e+00
-beta2  3.000000e-01 0.000000e+00 0.000000e+00  2.000000e-01  3.000000e-01
-beta3  8.000000e-01 0.000000e+00 1.000000e-01  6.000000e-01  7.000000e-01
-beta4  5.000000e-01 0.000000e+00 2.000000e-01  2.000000e-01  4.000000e-01
-beta5 -2.000000e-01 0.000000e+00 1.000000e-01 -4.000000e-01 -3.000000e-01
-beta6  0.000000e+00 0.000000e+00 1.000000e-01 -1.000000e-01  0.000000e+00
-beta7 -3.067249e+10 7.188182e+10 2.043065e+11 -5.281614e+11 -1.497746e+11
-sigma  3.200000e+00 0.000000e+00 1.000000e-01  3.100000e+00  3.200000e+00
-lp__  -2.712700e+03 1.000000e-01 1.900000e+00 -2.717700e+03 -2.713800e+03
-                50%           75%         97.5% n_eff Rhat
-beta1  1.700000e+00           2.0  2.500000e+00  1136  1.0
-beta2  3.000000e-01           0.3  3.000000e-01  1500  1.0
-beta3  8.000000e-01           0.9  1.000000e+00  1500  1.0
-beta4  5.000000e-01           0.7  9.000000e-01  1500  1.0
-beta5 -2.000000e-01          -0.2 -1.000000e-01  1408  1.0
-beta6  0.000000e+00           0.1  2.000000e-01  1500  1.0
-beta7 -5.381888e+10 82099682387.2  3.436403e+11     8  1.6
-sigma  3.200000e+00           3.3  3.300000e+00  1500  1.0
-lp__  -2.712400e+03       -2711.3 -2.710000e+03   633  1.0
+         mean se_mean  sd    2.5%     25%     50%     75%   97.5% n_eff Rhat
+beta1     1.7     0.0 0.4     0.9     1.4     1.7     1.9     2.4   898    1
+beta2     0.3     0.0 0.0     0.2     0.3     0.3     0.3     0.3  1388    1
+beta3     0.8     0.0 0.1     0.6     0.7     0.8     0.9     1.0  1144    1
+beta4     0.5     0.0 0.2     0.2     0.4     0.5     0.7     0.9  1500    1
+beta5    -0.2     0.0 0.1    -0.4    -0.3    -0.2    -0.2    -0.1  1298    1
+beta6     0.0     0.0 0.1    -0.1     0.0     0.0     0.1     0.2  1178    1
+sigma     3.2     0.0 0.1     3.1     3.2     3.2     3.3     3.3  1370    1
+lp__  -2712.9     0.1 1.9 -2717.7 -2713.9 -2712.6 -2711.4 -2710.2   535    1
 
-Samples were drawn using NUTS(diag_e) at Thu Mar 13 10:09:31 2014.
+Samples were drawn using NUTS(diag_e) at Thu Mar 13 11:47:07 2014.
 For each parameter, n_eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction factor on split chains (at 
 convergence, Rhat=1).
@@ -508,100 +522,3 @@ convergence, Rhat=1).
 
 As we can see in the output of stan model m1 (as well as Figure 2), the 95\% confidence interval of righttide ideology falls between 0.2 and 0.3 (both larger than 0). Thus we conclude that it is statistically significant that righttide ideology has a 0.3 coefficient effect on people's preference to PRI: with one unit increase in righttide leaning, the person's preference to PRI increases by 0.3.
 
-
-
-\begin{Schunk}
-\begin{Soutput}
-SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 1).
-
-Iteration:   1 / 1000 [  0%]  (Warmup)
-Iteration: 100 / 1000 [ 10%]  (Warmup)
-Iteration: 200 / 1000 [ 20%]  (Warmup)
-Iteration: 300 / 1000 [ 30%]  (Warmup)
-Iteration: 400 / 1000 [ 40%]  (Warmup)
-Iteration: 500 / 1000 [ 50%]  (Warmup)
-Iteration: 600 / 1000 [ 60%]  (Sampling)
-Iteration: 700 / 1000 [ 70%]  (Sampling)
-Iteration: 800 / 1000 [ 80%]  (Sampling)
-Iteration: 900 / 1000 [ 90%]  (Sampling)
-Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 62.964 seconds (Warm-up)
-              59.3 seconds (Sampling)
-              122.264 seconds (Total)
-
-SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 2).
-
-Iteration:   1 / 1000 [  0%]  (Warmup)
-Iteration: 100 / 1000 [ 10%]  (Warmup)
-Iteration: 200 / 1000 [ 20%]  (Warmup)
-Iteration: 300 / 1000 [ 30%]  (Warmup)
-Iteration: 400 / 1000 [ 40%]  (Warmup)
-Iteration: 500 / 1000 [ 50%]  (Warmup)
-Iteration: 600 / 1000 [ 60%]  (Sampling)
-Iteration: 700 / 1000 [ 70%]  (Sampling)
-Iteration: 800 / 1000 [ 80%]  (Sampling)
-Iteration: 900 / 1000 [ 90%]  (Sampling)
-Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 61.037 seconds (Warm-up)
-              60.491 seconds (Sampling)
-              121.528 seconds (Total)
-
-SAMPLING FOR MODEL 'PRIfeel.code.1' NOW (CHAIN 3).
-
-Iteration:   1 / 1000 [  0%]  (Warmup)
-Iteration: 100 / 1000 [ 10%]  (Warmup)
-Iteration: 200 / 1000 [ 20%]  (Warmup)
-Iteration: 300 / 1000 [ 30%]  (Warmup)
-Iteration: 400 / 1000 [ 40%]  (Warmup)
-Iteration: 500 / 1000 [ 50%]  (Warmup)
-Iteration: 600 / 1000 [ 60%]  (Sampling)
-Iteration: 700 / 1000 [ 70%]  (Sampling)
-Iteration: 800 / 1000 [ 80%]  (Sampling)
-Iteration: 900 / 1000 [ 90%]  (Sampling)
-Iteration: 1000 / 1000 [100%]  (Sampling)
-Elapsed Time: 62.597 seconds (Warm-up)
-              67 seconds (Sampling)
-              129.597 seconds (Total)
-\end{Soutput}
-\begin{Soutput}
-              b            lb            ub
-1  1.674333e+00  8.322711e-01  2.465160e+00
-2  2.895542e-01  2.397764e-01  3.422557e-01
-3  7.922801e-01  6.111619e-01  9.722532e-01
-4  5.454781e-01  2.174920e-01  8.527266e-01
-5 -2.385065e-01 -3.676629e-01 -8.157804e-02
-6  3.693938e-02 -1.148660e-01  1.671959e-01
-7 -3.067249e+10 -3.287967e+11  3.924809e+11
-\end{Soutput}
-\end{Schunk}
-
-\begin{figure}[htbp] 
-  \caption{Posterior Distribution of the Effect of Ideology}
-  \label{F:postide}
-  \begin{center}
-    \includegraphics[width=5.25in]{PS3-f1.pdf}
-  \end{center}
-\end{figure}
-
-\begin{figure}[htbp] 
-  \caption{Posterior Distribution of the Effect of Ideology}
-  \label{F:postide}
-  \begin{center}
-    \includegraphics[width=5.25in]{PS3-f2.pdf}
-  \end{center}
-  \begin{footnotesize}
-  \begin{tabular}{p{.4in} p{4.75in}}
-  & \emph{Note}: Continuous variables rescaled by dividing by twice their standard deviations per \citet{Gelman2008}.
-  \end{tabular}
-  \end{footnotesize}
-\end{figure}
-
-
-\bibliographystyle{ajps}
-\bibliography{PS3Library}
-
-\end{enumerate}
-\end{document}
-=======
-+     marginal.likelihood =("none") )
->>>>>>> 7aa62a21968e215f5350ff120fc5a09736db651c
